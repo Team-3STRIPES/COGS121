@@ -1,2 +1,2 @@
 # COGS121
-Making a translation web applicaiton that converts slang to plain English 
+Making a translation web application that converts slang to plain English 
