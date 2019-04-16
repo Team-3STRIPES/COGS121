@@ -34,23 +34,27 @@ None of us are Deaf, and none of us know how to sign ASL. We believe that this i
 ## Storyboards
 ### Storyboard 1: ASL Translator
 In this scenario, a new coworker is unable to communicate with his other coworkers because they do not know ASL. The usage of our application helps to bring connection.
+<br />
 ![Storyboard 1](images/story1.jpeg)
 
 ### Storyboard 2: Slang Translator
 In this scenario, the parent is unable to understand the things that their child has posted on social media. Our application could help bridge this gap.
+<br />
 ![Storyboard 2](images/story2.jpeg)
 
 ## Prototypes
 ### Prototype 1: ASL Translator
 The application is rather simple, allowing someone to sign the ASL alphabet into the camera to be translated into written English.
-![Screen 1](images/proto1-1.png)
-![Screen 2](images/proto1-2.png)
+<br />
+![Screen 1](images/proto1-1.png)<br />
+![Screen 2](images/proto1-2.png)<br />
 ![Screen 3](images/proto1-3.png)
 
 ### Prototype 2: Slang Translator
 With this application, not only can users translate from slang to English (or vice versa), but they can also study slang words and be tested on their knowledge in order to be better educated.
-![Screen 1](images/proto2-1.png)
-![Screen 2](images/proto2-2.png)
-![Screen 3](images/proto2-3.png)
-![Screen 4](images/proto2-4.png)
+<br />
+![Screen 1](images/proto2-1.png)<br />
+![Screen 2](images/proto2-2.png)<br />
+![Screen 3](images/proto2-3.png)<br />
+![Screen 4](images/proto2-4.png)<br />
 ![Screen 5](images/proto2-5.png)
