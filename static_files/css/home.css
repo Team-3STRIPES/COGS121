@@ -59,7 +59,7 @@ h1.logo {
 }
 
 .translate-square {
-  height: 300px;
+  height: 400px;
   width: 50%;
 }
 
@@ -67,16 +67,11 @@ h1.logo {
   border-top-left-radius: 10px;
 }
 
-#left-text {
-  border-bottom-left-radius: 10px;
-}
-
 #right-state {
   border-top-right-radius: 10px;
 }
 
 #right-text {
-  border-bottom-right-radius: 10px;
   color: #999;
   background-color: #FFF5C4;
 }
@@ -87,7 +82,6 @@ h1.logo {
   flex-direction: row;
   align-content: center;
   border: 1px solid #666;
-  border-bottom: none;
 }
 
 .translate-state-opt {
@@ -105,6 +99,7 @@ h1.logo {
   border-bottom: 8px solid transparent;
   transition: background-color 0.25s ease;
   margin-left: 8px;
+  transition: all 0.5s ease;
 }
 
 .active {
@@ -120,19 +115,82 @@ h1.logo {
 
 .translate-square textarea {
   width: 100%;
-  height: 80%;
+  height: 65%;
   resize: none;
   box-sizing: border-box;
   border: 1px solid #666;
+  border-top: none;
+  border-bottom: none;
   font-size: 1.5em;
   font-family: 'Oxygen', sans-serif;
   font-weight: 300;
   color: #111;
   padding: 4%;
+  vertical-align: top;
 }
 
 .translate-square textarea:focus {
   outline: none;
+}
+
+[class^='translate-footer'] {
+  background-color: #EEE;
+  height: 15%;
+  border: 1px solid #666;
+}
+
+.translate-footer-left {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+}
+
+.translate-footer-left > div {
+  flex: calc(1/3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 0.25s ease;
+}
+
+.translate-footer-left > div:hover {
+  cursor: pointer;
+  background-color: #DDD;
+}
+
+.translate-footer-left > div:first-child {
+  border-right: 1px solid #666;
+}
+
+.translate-footer-left > div:last-child {
+  border-left: 1px solid #666;
+}
+
+.translate-footer-right {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+}
+
+.translate-footer-right > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.translate-footer-right > div:first-child {
+  width: 100px;
+  border-right: 1px solid #666;
+}
+
+.translate-footer-right > div:first-child:hover {
+  cursor: pointer;
+  background-color: #DDD;
+}
+
+.far, .fas {
+  font-size: 2em;
+  text-align: center;
 }
 
 .definition-section {
@@ -149,6 +207,7 @@ h2.subtitle {
 
 .definition {
   font-weight: 300;
+  font-size: 1.25em;
 }
 
 .definition-term {
