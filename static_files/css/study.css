@@ -115,6 +115,12 @@ h1 {
  	font-weight: 400;
  }
 
+ .incrementor {
+ 	text-align: center;
+ 	font-size: 2em;
+ 	margin-bottom: 4%;
+ }
+
 
 .finishbtn {
  	transition: background-color 0.25s ease;
