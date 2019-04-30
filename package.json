@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Team-3STRIPES/COGS121#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "urban-dictionary": "^2.2.1"
   }
 }

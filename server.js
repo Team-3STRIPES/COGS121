@@ -1,6 +1,7 @@
 var http = require('http'),
     express = require('express'),
-    path = require('path');
+    path = require('path'),
+    ud = require('urban-dictionary');
 
 var app = express();
 const PORT = 1500
@@ -25,6 +26,17 @@ app.get('/profile', function(req, res){
 
 app.get('/test', function(req, res){
   res.sendFile(path.join(__dirname, '/static_files/html/test.html'));
+})
+
+app.get('/defintion' function(req, res) {
+	ud.term(definition).then((result) => {
+		const entries = result.entries
+		console.log(entries[0].word)
+		console.log(entries[0].definition)
+		console.log(entries[0].example)
+	}).catch((error) => {
+		console.error(error.message)
+	})
 })
 
 
