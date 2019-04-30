@@ -3,36 +3,36 @@
   <head>
     <meta charset="utf-8">
     <title>Home</title>
+    <link href="https://fonts.googleapis.com/css?family=Oxygen:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="home.css">
   </head>
   <body>
     <nav>
-      <h1 style="text-align: center;">Translator</h1>
-      <div style="float: right;">
-        <a href="profile.html">PROFILE</a>
-        <a href="#">SIGN OUT</a>
+      <h1 class="logo">translator</h1>
+      <div class="nav-options">
+        <a class="nav-option" href="profile.html">PROFILE</a>
+        <a class="nav-option" href="#">SIGN OUT</a>
       </div>
     </nav>
-    <br>
-    <br>
-    <div style="display: flex; flex-direction: row">
-      <div style="display: flex; flex-direction: column; height: 600px; width: 50%;">
-        <div>
-          <a href="#">SLANG</a>
-          <a href="#">FORMAL</a>
+    <div class="translation-section">
+      <div class="translate-square">
+        <div class="translate-state">
+          <a class="translate-state-opt active" href="#s-to-f">SLANG</a>
+          <a class="translate-state-opt" href="#f-to-s">FORMAL</a>
         </div>
-        <textarea style="height: 100%; width: 100%;"></textarea>
+        <textarea></textarea>
       </div>
-      <div style="display: flex; flex-direction: column; height: 600px; width: 50%;">
-        <div>
-          <a href="#">SLANG</a>
-          <a href="#">FORMAL</a>
+      <div class="translate-square">
+        <div class="translate-state">
+          <a class="translate-state-opt" href="#f-to-s">SLANG</a>
+          <a class="translate-state-opt active" href="#s-to-f">FORMAL</a>
         </div>
-        <textarea style="height: 100%; width: 100%;"></textarea>
+        <textarea readonly></textarea>
       </div>
     </div>
-    <div>
-      <h2 style="text-align: center;">Definitions</h2>
-      <p><b>lmk:</b> let me know</p>
+    <div class="definition-section">
+      <h2 class="subtitle">Definitions</h2>
+      <p class="definition"><span class="definition-term">lmk</span> let me know</p>
     </div>
   </body>
 </html>
