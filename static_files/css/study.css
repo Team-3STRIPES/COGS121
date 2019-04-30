@@ -36,12 +36,30 @@ h1 {
 	margin: 2% 0;
 }
 
+
+.flash-card-content {
+	display: flex;
+	flex-direction: row;
+	width: 80%;
+	margin: 2% auto;
+	justify-content: space-between;
+}
+
+.fas {
+	margin-top: auto;
+	margin-bottom: auto;
+	font-size: 6em;
+	color: #BBB;
+}
+
+.fas:hover {
+	color: #555;
+}
+
 .flash-card {
 	display: flex; 
 	flex-direction: column; 
 	width: 50%; 
-	margin-left: auto; 
-	margin-right: auto; 
 	border-radius: 10px;
 	background-color: #EEE;
 	color: #111;
@@ -60,7 +78,6 @@ h1 {
 
 .flash-card-body {
 	padding: 4%;
-
 
 }
 
@@ -81,6 +98,12 @@ h1 {
  	width: 70%; 
  	margin: 2% auto;
  	justify-content: space-between;
+ }
+
+ .direction{
+ 	text-decoration: none;
+ 	color: #555; 
+ 	font-weight: 400;
  }
 
 
