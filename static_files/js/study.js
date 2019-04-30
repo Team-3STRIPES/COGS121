@@ -26,14 +26,20 @@ $(document).ready(() => {
     $('.flash-card-ex').first().text(dummyCards[currentIndex].example);
   }
 
-  setFlashCard();
+  function setNumbers() {
+     $("#flash-card-total").text(dummyCards.length);
+     $("#flash-card-index").text(1);
+  }
 
-  function fadeNewCard() {
+  setFlashCard();
+  setNumbers();
+
+  function fadeLeftCard() {
     setFlashCard();
-    $('.flash-card').first().css('left', '+=200');
+    /*$('.flash-card').first().css('left', '+=200');*/
     $('.flash-card').first().animate({
       opacity: 1,
-      left: '-=100'
+      left: '+=100'
     }, 500);
   }
 
@@ -42,6 +48,28 @@ $(document).ready(() => {
     $('.flash-card').first().animate({
       opacity: 0,
       left: '-=100'
-    }, 500, fadeNewCard);
+    }, 500, fadeLeftCard);
+    $('#flash-card-index').text(currentIndex + 1)
   });
+
+
+  function fadeRightCard() {
+    setFlashCard();
+    /*$('.flash-card').first().css('left', '-=200');*/
+    $('.flash-card').first().animate({
+      opacity: 1,
+      left:'-=100'
+    }, 500) ;
+  }
+
+  $('.right-arrow').on('click', () => {
+    currentIndex = (currentIndex + dummyCards.length - 2) % dummyCards.length;
+    $('.flash-card').first().animate({
+      opacity: 0, 
+      left: '+=100'
+    }, 500, fadeRightCard)
+    $('#flash-card-index').text(currentIndex + 1)
+  })
+
+
 });
