@@ -1,0 +1,138 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-family: 'Oxygen', sans-serif;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  margin: 2% 3%;
+}
+
+.nav-options {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+}
+
+.nav-option {
+  font-weight: 300;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 120px;
+  text-align: center;
+  color: #666;
+  transition: background-color 0.25s ease;
+  font-size: 1em;
+}
+
+.nav-option:first-child {
+  margin-right: 20px;
+}
+
+.nav-option:hover {
+  color: #111;
+  background-color: #EEE;
+}
+
+h1.logo {
+  font-size: 2.5em;
+  text-align: center;
+  font-weight: 400;
+}
+
+.translation-section {
+  display: flex;
+  flex-direction: row;
+  width: 96%;
+  box-shadow: 0 0 8px #BBB;
+  margin: 6% auto 0;
+}
+
+.translate-square {
+  height: 400px;
+  width: 50%;
+}
+
+.translate-state {
+  height: 16%;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  border: 1px solid #666;
+  border-bottom: none;
+}
+
+.translate-state-opt {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-decoration: none;
+  color: #666;
+  width: 140px;
+  text-align: center;
+  font-weight: 300;
+  font-size: 1.25em;
+  box-sizing: border-box;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  transition: background-color 0.25s ease;
+}
+
+.active {
+  font-weight: 700;
+  border-bottom: 8px solid #F7D345;
+  color: #111;
+}
+
+.translate-state-opt:hover {
+  color: #111;
+  background-color: #F8F8F8;
+}
+
+.translate-square textarea {
+  width: 100%;
+  height: 84%;
+  resize: none;
+  box-sizing: border-box;
+  border: 1px solid #666;
+  font-size: 1.5em;
+  font-family: 'Oxygen', sans-serif;
+  font-weight: 300;
+  color: #111;
+  padding: 4%;
+}
+
+.translate-square textarea:focus {
+  outline: none;
+}
+
+.definition-section {
+  margin: 2% auto;
+  width: 60%;
+}
+
+h2.subtitle {
+  font-size: 2.5em;
+  border-bottom: 1px solid #BBB;
+  padding-bottom: 1%;
+  margin-bottom: 2%;
+}
+
+.definition {
+  font-weight: 300;
+}
+
+.definition-term {
+  font-weight: 400;
+  display: inline-block;
+  width: 20%;
+}
