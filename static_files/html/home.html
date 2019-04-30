@@ -5,6 +5,7 @@
     <title>Home</title>
     <link href="https://fonts.googleapis.com/css?family=Oxygen:300,400,700" rel="stylesheet">
     <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="home.js"></script>
   </head>
@@ -19,17 +20,33 @@
     <div class="translation-section">
       <div class="translate-square">
         <div class="translate-state" id="left-state">
-          <a class="translate-state-opt active" href="#s-to-f">SLANG</a>
-          <a class="translate-state-opt" href="#f-to-s">FORMAL</a>
+          <a class="translate-state-opt s-to-f active" href="#s-to-f">SLANG</a>
+          <a class="translate-state-opt f-to-s" href="#f-to-s">FORMAL</a>
         </div>
         <textarea id="left-text"></textarea>
+        <div class="translate-footer-left">
+          <div>
+            <i class="far fa-keyboard"></i>
+          </div>
+          <div>
+            <i class="fas fa-microphone"></i>
+          </div>
+          <div>
+            <i class="far fa-image"></i>
+          </div>
+        </div>
       </div>
       <div class="translate-square">
         <div class="translate-state" id="right-state">
-          <a class="translate-state-opt" href="#f-to-s">SLANG</a>
-          <a class="translate-state-opt active" href="#s-to-f">FORMAL</a>
+          <a class="translate-state-opt f-to-s" href="#f-to-s">SLANG</a>
+          <a class="translate-state-opt s-to-f active" href="#s-to-f">FORMAL</a>
         </div>
         <textarea id="right-text" readonly>Translation</textarea>
+        <div class="translate-footer-right">
+          <div>
+            <i class="fas fa-volume-up"></i>
+          </div>
+        </div>
       </div>
     </div>
     <div class="definition-section">

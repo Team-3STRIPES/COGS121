@@ -27,4 +27,15 @@ $(document).ready(() => {
     }
     $outputBox.val(finalMessage);
   }
+
+  $('.f-to-s').on('click', () => {
+    $('.s-to-f').removeClass('active');
+    $('.f-to-s').addClass('active');
+  });
+
+  $('.s-to-f').on('click', () => {
+    $('.f-to-s').removeClass('active');
+    $('.s-to-f').addClass('active');
+  });
+
 });
