@@ -3,24 +3,33 @@
   <head>
     <meta charset="utf-8">
     <title>Study</title>
+    <link href="https://fonts.googleapis.com/css?family=Oxygen:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="study.css">
   </head>
   <body>
-    <a href="profile.html">&lt; BACK TO PROFILE</a>
-    <h1 style="text-align: center;">Study Flash Cards</h1>
-    <div style="display: flex; flex-direction: column; width: 50%; margin-left: auto; margin-right: auto; border: 2px solid black;">
-      <h3>Word:</h3>
-      <p>lit</p>
-      <h3>Definition:</h3>
-      <p>amazing; spectacular</p>
-      <h3>Example:</h3>
-      <p>I loved the party last night. It was so lit!</p>
+    <a class="button" href="profile.html">
+    <div class="profilebtn"> &lt; BACK TO PROFILE</div>
+    </a>
+    <h1>Flash Cards</h1>
+    <div class="flash-card">
+      <div class="flash-card-header">
+        <p class="flash-card-word">lit</p>
+      </div>
+      <br>
+      <div class="flash-card-body">
+        <p>Definition<p>
+        <p class="flash-card-def">amazing; spectacular</p>
+        <br>
+        <p>Example<p>
+        <p class="flash-card-ex">I loved the party last night. It was so lit!</p>
+      </div>
     </div>
-    <div style="display: flex; flex-direction: row; width: 70%; margin-left: auto; margin-right: auto; justify-content: space-between;">
-      <a href="#">&lt; PREVIOUS</a>
-      <a href="#">NEXT &gt;</a>
+    <div class="navbtn">
+      <a class="direction" style="text-decoration: none;color: #555; font-weight: 400" href="#">&lt; PREVIOUS</a>
+      <a class="direction" style="text-decoration: none;color: #555; font-weight: 400" href="#">NEXT &gt;</a>
     </div>
-    <div style="display: flex; justify-content: center;">
-      <button onclick="window.location.href='profile.html'">Finish Studying</button>
-    </div>
+    <a class="button" href="profile.html">
+      <div class="finishbtn">FINISH</div>
+    </a>
   </body>
 </html>
