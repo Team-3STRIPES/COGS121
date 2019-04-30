@@ -10,7 +10,6 @@ app.use(express.static(__dirname+'/static_files/css'));
 app.use(express.static(__dirname+'/static_files/js'));
 app.use(express.static(__dirname+'/static_files/media'));
 
-
 app.get('/', function(req, res){
   res.sendFile(path.join(__dirname, '/static_files/html/home.html'));
 })
