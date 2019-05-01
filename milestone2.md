@@ -11,22 +11,22 @@ In our UI skeletons, all of the original features that were shown on our prototy
 
 ### Home Page
 <br />
-<img src="milestone_images/skeleton1.png">
+<img style="border: 1px solid gray;" src="milestone_images/skeleton1.png">
 <br />
 In our home page, we included text to speech buttons on both sides of the translator so that users can listen to how both slang and formal language is pronounced. We also made the right side yellow to indicate that it is the translation side. It also displays "Translation" by default when nothing has been inputed so the user understands the right side of the translator produces the translations.
 
 ### Profile Page
 <br />
-<img src="milestone_images/skeleton2.png">
+<img style="border: 1px solid gray;" src="milestone_images/skeleton2.png">
 <br />
 
 ### Study Page
 <br />
-<img src="milestone_images/skeleton3.png">
+<img style="border: 1px solid gray;" src="milestone_images/skeleton3.png">
 <br />
 On the flash card page, we simply added a counter at the bottom to help the user keep track of the flash card that they are currently viewing. We also moved the previous and next buttons to be directly next to the flash card as we felt that it was more intuitive and easy to use.
 
 ### Test Page
 <br />
-<img src="milestone_images/skeleton4.png">
+<img style="border: 1px solid gray;" src="milestone_images/skeleton4.png">
 <br />
