@@ -23,7 +23,12 @@
           <a class="translate-state-opt s-to-f active" href="#s-to-f">SLANG</a>
           <a class="translate-state-opt f-to-s" href="#f-to-s">FORMAL</a>
         </div>
-        <textarea id="left-text"></textarea>
+        <div class="translate-input">
+          <textarea id="left-text"></textarea>
+          <a id="left-sound" href="#left-sound">
+            <i class="fas fa-volume-up"></i>
+          </a>
+        </div>
         <div class="translate-footer-left">
           <div>
             <i class="far fa-keyboard"></i>
@@ -41,10 +46,17 @@
           <a class="translate-state-opt f-to-s" href="#f-to-s">SLANG</a>
           <a class="translate-state-opt s-to-f active" href="#s-to-f">FORMAL</a>
         </div>
-        <textarea id="right-text" readonly>Translation</textarea>
+        <div class="translate-input">
+          <textarea id="right-text" readonly>Translation</textarea>
+          <a id="right-sound" href="#right-sound">
+            <i class="fas fa-volume-up"></i>
+          </a>
+        </div>
         <div class="translate-footer-right">
           <div>
-            <i class="fas fa-volume-up"></i>
+            <p>Is this a good translation?</p>
+            <a href="#good" id="good">Yes</a>
+            <a href="#bad" id="bad">No</a>
           </div>
         </div>
       </div>

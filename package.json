@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Team-3STRIPES/COGS121#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "child-process": "^1.0.2",
     "express": "^4.16.4",
     "urban-dictionary": "^2.2.1"
   }
