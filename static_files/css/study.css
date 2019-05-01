@@ -1,0 +1,142 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	font-family: 'Oxygen', sans-serif;
+}
+
+.button {
+	text-decoration: none;
+	color: #666;
+}
+
+.profilebtn {
+ 	transition: background-color 0.25s ease;
+ 	text-align: center;
+ 	width: 160px;
+ 	margin: 2% 3%;
+ 	padding: 1% 0;
+ 	font-size: 1em;
+ 	color: #111;
+ 	font-weight: 300;
+
+ }
+
+ .profilebtn:hover {
+ 	background-color: #EEE;
+ }
+
+
+h1 {
+	font-size: 2.5em;
+	text-align: center;
+	font-weight: 400;
+	margin: 2% 0;
+}
+
+
+.flash-card-content {
+	display: flex;
+	flex-direction: row;
+	width: 80%;
+	margin: 4% auto;
+	justify-content: space-around;
+}
+
+[class$="arrow"] {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+}
+
+.fas {
+	margin-top: auto;
+	margin-bottom: auto;
+	font-size: 6em;
+	color: #BBB;
+  transition: color 0.25s ease;
+}
+
+.fas:hover {
+	color: #555;
+  cursor: pointer;
+}
+
+.flash-card {
+  position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+	border-radius: 10px;
+	background-color: #EEE;
+	color: #111;
+	box-shadow: 0 0 8px -2px #666;
+	font-size: 1.5em;
+}
+
+.flash-card-header {
+	padding: 4%;
+	background-color: #f7d345;
+	color: #111;
+	text-align: center;
+	font-size: 2em;
+	font-weight: 700;
+}
+
+.flash-card-body {
+	padding: 4%;
+
+}
+
+.flash-card-def {
+	text-align: left;
+	font-weight: 300;
+}
+
+.flash-card-ex {
+	text-align: left;
+	font-weight: 300;
+}
+
+
+.navbtn{
+ 	display: flex;
+ 	flex-direction: row;
+ 	width: 70%;
+ 	margin: 2% auto;
+ 	justify-content: space-between;
+ }
+
+ .direction{
+ 	text-decoration: none;
+ 	color: #555;
+ 	font-weight: 400;
+ }
+
+ .incrementor {
+ 	text-align: center;
+ 	font-size: 2em;
+ 	margin-bottom: 4%;
+ }
+
+
+.finishbtn {
+ 	transition: background-color 0.25s ease;
+ 	text-align: center;
+ 	margin: 0 auto;
+ 	width: 140px;
+ 	padding: 1.5% 2%;
+ 	font-size: 1em;
+ 	background-color: #ffee9b;
+ 	border-radius: 8px;
+ 	color: #111;
+ 	font-weight: 700;
+
+ }
+
+.finishbtn:hover {
+ 	background-color: #f7d345;
+ 	color: white;
+ }

@@ -3,36 +3,55 @@
   <head>
     <meta charset="utf-8">
     <title>Home</title>
+    <link href="https://fonts.googleapis.com/css?family=Oxygen:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="home.js"></script>
   </head>
   <body>
     <nav>
-      <h1 style="text-align: center;">Translator</h1>
-      <div style="float: right;">
-        <a href="profile.html">PROFILE</a>
-        <a href="#">SIGN OUT</a>
+      <h1 class="logo">translator</h1>
+      <div class="nav-options">
+        <a class="nav-option" href="profile.html">PROFILE</a>
+        <a class="nav-option" href="#">SIGN OUT</a>
       </div>
     </nav>
-    <br>
-    <br>
-    <div style="display: flex; flex-direction: row">
-      <div style="display: flex; flex-direction: column; height: 600px; width: 50%;">
-        <div>
-          <a href="#">SLANG</a>
-          <a href="#">FORMAL</a>
+    <div class="translation-section">
+      <div class="translate-square">
+        <div class="translate-state" id="left-state">
+          <a class="translate-state-opt s-to-f active" href="#s-to-f">SLANG</a>
+          <a class="translate-state-opt f-to-s" href="#f-to-s">FORMAL</a>
         </div>
-        <textarea style="height: 100%; width: 100%;"></textarea>
+        <textarea id="left-text"></textarea>
+        <div class="translate-footer-left">
+          <div>
+            <i class="far fa-keyboard"></i>
+          </div>
+          <div>
+            <i class="fas fa-microphone"></i>
+          </div>
+          <div>
+            <i class="far fa-image"></i>
+          </div>
+        </div>
       </div>
-      <div style="display: flex; flex-direction: column; height: 600px; width: 50%;">
-        <div>
-          <a href="#">SLANG</a>
-          <a href="#">FORMAL</a>
+      <div class="translate-square">
+        <div class="translate-state" id="right-state">
+          <a class="translate-state-opt f-to-s" href="#f-to-s">SLANG</a>
+          <a class="translate-state-opt s-to-f active" href="#s-to-f">FORMAL</a>
         </div>
-        <textarea style="height: 100%; width: 100%;"></textarea>
+        <textarea id="right-text" readonly>Translation</textarea>
+        <div class="translate-footer-right">
+          <div>
+            <i class="fas fa-volume-up"></i>
+          </div>
+        </div>
       </div>
     </div>
-    <div>
-      <h2 style="text-align: center;">Definitions</h2>
-      <p><b>lmk:</b> let me know</p>
+    <div class="definition-section">
+      <h2 class="subtitle">Definitions</h2>
+      <p class="definition"><span class="definition-term">lmk</span> let me know</p>
     </div>
   </body>
 </html>

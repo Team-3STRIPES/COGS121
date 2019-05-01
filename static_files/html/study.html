@@ -3,24 +3,42 @@
   <head>
     <meta charset="utf-8">
     <title>Study</title>
+    <link href="https://fonts.googleapis.com/css?family=Oxygen:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="study.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="study.js"></script>
   </head>
   <body>
-    <a href="profile.html">&lt; BACK TO PROFILE</a>
-    <h1 style="text-align: center;">Study Flash Cards</h1>
-    <div style="display: flex; flex-direction: column; width: 50%; margin-left: auto; margin-right: auto; border: 2px solid black;">
-      <h3>Word:</h3>
-      <p>lit</p>
-      <h3>Definition:</h3>
-      <p>amazing; spectacular</p>
-      <h3>Example:</h3>
-      <p>I loved the party last night. It was so lit!</p>
+    <a class="button" href="profile.html">
+    <div class="profilebtn"> &lt; BACK TO PROFILE</div>
+    </a>
+    <h1>Flash Cards</h1>
+    <div class="flash-card-content">
+      <div class="left-arrow">
+       <i class="fas fa-chevron-left"></i>
+      </div>
+      <div class="flash-card">
+        <div class="flash-card-header">
+          <p class="flash-card-word"></p>
+        </div>
+        <div class="flash-card-body">
+          <p>Definition<p>
+          <p class="flash-card-def"></p>
+          <br>
+          <p>Example<p>
+          <p class="flash-card-ex"></p>
+        </div>
+      </div>
+      <div class="right-arrow">
+        <i class="fas fa-chevron-right"></i>
+      </div>
     </div>
-    <div style="display: flex; flex-direction: row; width: 70%; margin-left: auto; margin-right: auto; justify-content: space-between;">
-      <a href="#">&lt; PREVIOUS</a>
-      <a href="#">NEXT &gt;</a>
-    </div>
-    <div style="display: flex; justify-content: center;">
-      <button onclick="window.location.href='profile.html'">Finish Studying</button>
-    </div>
+    <p class="incrementor">
+      <span id="flash-card-index"></span>/<span id="flash-card-total"></span>
+    </p>
+    <a class="button" href="profile.html">
+      <div class="finishbtn">FINISH</div>
+    </a>
   </body>
 </html>
