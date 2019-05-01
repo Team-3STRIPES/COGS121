@@ -1,12 +1,13 @@
 $(document).ready(() => {
 
+  let userInput;
   let finalMessage;
   let countDownTimer;
   const $inputBox = $('#left-text');
   const $outputBox = $('#right-text');
 
   $('#left-text').on('input', () => {
-    finalMessage = $inputBox.val();
+    userInput = $inputBox.val();
   });
 
   $inputBox.on('keydown', () => {
@@ -38,27 +39,23 @@ $(document).ready(() => {
     $outputBox.val(finalMessage);
   }
 
-
   function reqDefinition() {
    $.ajax({
-      url : "/def",
+      url: "/def",
       type: "GET",
-      data : {
-              def: finalMessage,
-             },
-      success: function(data, textStatus, jqXHR)
-      {
-        //displayTranslation()
+      data: {
+              def: userInput,
+            },
+      success: (data, textStatus, jqXHR) => {
         finalMessage = data.def;
         displayTranslation();
       },
-      error: function(jqXHR, textStatus, errorThrown)
-      {
-        //displayTranslation()
+      error: (jqXHR, textStatus, errorThrown) => {
         let word = jqXHR.responseJSON.word;
         finalMessage = word;
         displayTranslation();
-      },
-    })
+      }
+    });
   }
+  
 });
