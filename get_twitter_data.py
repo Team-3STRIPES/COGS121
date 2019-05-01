@@ -10,10 +10,10 @@ config.read('config.ini')
 
 
 #Variables that contains the user credentials to access Twitter API 
-access_token = config['DEFAULT']['access_token']
-access_token_secret = config['DEFAULT']['access_token_secret']
-consumer_key = config['DEFAULT']['consumer_key']
-consumer_secret = config['DEFAULT']['consumer_secret']
+access_token = config['default']['atoken']
+access_token_secret = config['default']['asecret']
+consumer_key = config['default']['ckey']
+consumer_secret = config['default']['csecret']
 
 
 #This is a basic listener that just prints received tweets to stdout.
@@ -24,6 +24,14 @@ class StdOutListener(StreamListener):
         try:
             text = tweet['text']
             print(text +"\n")
+            words = text.split()
+            if words[0] == 'RT':
+                words = words[1:]
+            words = [w for w in words if w[0] != '@' and w[:5] != 'https' and "…" not in w]
+            words = " ".join(words)+"\n"
+            words = words.replace("“", "\"").replace("’", "'").replace("”", "\"")
+            file = open('twitter_session_1_may_2019.txt','a')
+            file.write(words)
         except:
             pass
         return True
@@ -38,5 +46,4 @@ if __name__ == '__main__':
     auth = OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
     stream = Stream(auth, l)
-
-    stream.filter(track=['lit', 'bae', 'af', 'low key', 'bruh', 'on fleek', 'oof', 'yikes', 'fam', 'savage', 'fomo', 'jomo', 'tbh', 'yeet', 'thicc', 'suh', 'swol', 'cray', 'smh', 'finna', 'dm', 'high key', 'light weight', 'woke', 'yass'])
+    stream.filter(languages=["en"], track=['lit', 'bae', 'af', 'low key', 'bruh', 'on fleek', 'oof', 'yikes', 'fam', 'savage', 'fomo', 'jomo', 'tbh', 'yeet', 'thicc', 'suh', 'swol', 'cray', 'smh', 'finna', 'dm', 'high key', 'light weight', 'woke', 'yass', 'yas', 'love you 3000', 'wet', 'fire', 'popping', 'salty', 'gucci', 'adulting', 'basic', 'bet', 'can\'t even', 'chill', 'cringy', 'curve', 'deets', 'extra', 'dope', 'glow up', 'goals', 'hmu', 'dead', 'ligma', 'mood', 'otp', 'peeps', 'roast', 'same', 'ship', 'shots fired', 'slay', 'dm', 'smol', 'snacc', 'squad', 'thirsty', 'triggered', 'reee', 'woke' ]) # etc
