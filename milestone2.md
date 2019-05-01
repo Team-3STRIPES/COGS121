@@ -13,6 +13,7 @@ In our UI skeletons, all of the original features that were shown on our prototy
 <br />
 ![Home Page](milestone_images/skeleton1.png)
 <br />
+![Home Page](milestone_images/skeleton1.png)
 In our home page, we included text to speech buttons on both sides of the translator so that users can listen to how both slang and formal language is pronounced. We also made the right side yellow to indicate that it is the translation side. It also displays "Translation" by default when nothing has been inputed so the user understands the right side of the translator produces the translations.
 
 ### Profile Page
