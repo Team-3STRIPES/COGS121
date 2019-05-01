@@ -17,7 +17,7 @@ def query(sentence):
 				continue
 			definition = data['list'][0]['definition']
 			example = data['list'][0]['example']
-			
+
 			definition = definition.replace("[","").replace("]","").split("\n")[0].replace(" ", "+")
 			new_url = rl_url+definition
 			data = requests.get(new_url).json()
