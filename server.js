@@ -33,7 +33,7 @@ app.get('/test', function(req, res){
 
 app.get('/def', function(req, res) {
 	  let spawn = require("child_process").spawn;
-    let transcription = spawn('python',["word_to_def.py", req.query.def]);
+    let transcription = spawn('py',["word_to_def.py", req.query.def]);
 
     transcription.stdout.on('data', (data)=>{
       console.log('on data')
