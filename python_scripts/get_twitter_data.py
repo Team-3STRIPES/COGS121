@@ -30,7 +30,7 @@ class StdOutListener(StreamListener):
             words = [w for w in words if w[0] != '@' and w[:5] != 'https' and "…" not in w]
             words = " ".join(words)+"\n"
             words = words.replace("“", "\"").replace("’", "'").replace("”", "\"")
-            file = open('twitter_session_1_may_2019.txt','a')
+            file = open('twitter_data/twitter_session_1_may_2019.txt','a')
             file.write(words)
         except:
             pass
