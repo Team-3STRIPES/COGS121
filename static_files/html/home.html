@@ -56,5 +56,13 @@
       <h2 class="subtitle">Definitions</h2>
       <p class="definition"><span class="definition-term">lmk</span> let me know</p>
     </div>
+    <p id="firebase-data">asd</p>
   </body>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      let asd = $.get('https://cogs121-c88c5.firebaseio.com/.json', function(data) {
+        document.getElementById('firebase-data').innerHTML = JSON.stringify(data.slice(0,10));
+      });
+    });
+  </script>
 </html>
