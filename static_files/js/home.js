@@ -30,7 +30,7 @@ $(document).ready(() => {
   });
 
   function displayTranslation() {
-    if(finalMessage) {
+    if(finalMessage !== "\n") {
       $outputBox.css('color', '#111');
     } else {
       finalMessage = 'Translation';
@@ -40,7 +40,21 @@ $(document).ready(() => {
   }
 
   function reqDefinition() {
-   $.ajax({
+    let loadingMsg = 'Translating..';
+    const maxTimes = 5;
+    let curTimes = 0;
+    let loading = setInterval(() => {
+      $outputBox.css('color', '#999');
+      $outputBox.val(`${loadingMsg}.`);
+      if(curTimes === maxTimes) {
+        loadingMsg = 'Translating..';
+        curTimes = 0;
+      } else {
+        loadingMsg += ".";
+        curTimes++;
+      }
+    }, 150);
+    $.ajax({
       url: "/def",
       type: "GET",
       data: {
@@ -48,14 +62,24 @@ $(document).ready(() => {
             },
       success: (data, textStatus, jqXHR) => {
         finalMessage = data.def;
+        clearInterval(loading);
         displayTranslation();
       },
       error: (jqXHR, textStatus, errorThrown) => {
         let word = jqXHR.responseJSON.word;
         finalMessage = word;
+        clearInterval(loading);
         displayTranslation();
       }
     });
   }
-  
+
+  $('#signout').on('click', () => {
+    $('#profile').remove();
+    $('#signout').text('LOG IN');
+    setTimeout(() => {
+      $('#signout').attr('href', 'login.html');
+    }, 0);
+  })
+
 });
