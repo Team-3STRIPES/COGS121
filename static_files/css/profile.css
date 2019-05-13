@@ -150,7 +150,7 @@
   font-weight: 700;
 }
 
-.profile-edit-modal {
+#profile-edit-modal {
   position: absolute;
   top: 0;
   left: 0;
@@ -172,6 +172,7 @@
   font-weight: 700;
   color: #666;
   box-shadow: 0 0 16px #666;
+  z-index: 1;
 }
 
 .profile-edit-modal-box input {

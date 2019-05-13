@@ -63,7 +63,7 @@ h1 {
 
 .answer-option {
 	padding: 4%;
-	width: 650px; 
+	width: 650px;
 	background-color: #EEE;
 	border-radius: 8px;
 	margin: 1% auto;
@@ -81,9 +81,10 @@ h1 {
 
 
 .submitbtn {
+  border: none;
  	transition: background-color 0.25s ease;
  	text-align: center;
- 	margin: 0 auto;
+ 	margin-left: auto;
  	width: 140px;
  	padding: 3% 2.5%;
  	font-size: 1em;
@@ -117,8 +118,3 @@ h1 {
  	border: 1px solid #BBB;
  	border-radius: 15px;
  }
-
-
-
-
-

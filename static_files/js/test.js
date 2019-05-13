@@ -127,9 +127,9 @@ $(document).ready(() => {
 		else {
 			currentIndex++;
 			setQuestions();
-		}  		
+		}
   	})
 
 
-	
+
 });

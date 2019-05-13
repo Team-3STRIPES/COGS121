@@ -34,8 +34,8 @@ nav {
   font-size: 1em;
 }
 
-.nav-option:first-child {
-  margin-right: 20px;
+.nav-option:last-child {
+  margin-left: 20px;
 }
 
 .nav-option:hover {
@@ -170,6 +170,10 @@ h1.logo {
 
 #right-sound {
   background-color: white;
+}
+
+#translation-spinner {
+  display: none;
 }
 
 [class^='translate-footer'] {
