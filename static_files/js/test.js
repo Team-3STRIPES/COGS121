@@ -1,6 +1,7 @@
 $(document).ready(() => {
 
 	let currentIndex = 0;
+	let answerValue;
 
 	const dummyQuestions = [
 		{
@@ -109,27 +110,69 @@ $(document).ready(() => {
 	    $('#a4').text(dummyQuestions[currentIndex].a4);
   	}
 
+  	function setButton() {
+  		if (currentIndex === 9) {
+  			$('.submitbtn').text("SUBMIT");
+  		}
+  		else {
+			$('.submitbtn').text("NEXT");
+  		}
+  	}
+
+  	function setCircle() {
+  		for (i = 0; i <= currentIndex; i++) {
+				$('.progress-circle').eq(i).css("background-color", "#EEE");
+			}
+  	}
+
   	setQuestions();
+  	setButton(); 
+  	setCircle();
+
+
 
   	// marks selected as yellow, not selected as gray
 
   	$('.answer-option').on('click', function() {
   		$('.answer-option').css("background-color", "#EEE");
   		$(this).css("background-color", "#f7d345");
+  		answerValue = $(this).attr('id');
+  		console.log(answerValue);
 
   	})
 
-  	$('.submitbtn').on('click', (e) => {
-  		e.preventDefault();
-  		if (currentIndex === 9) {
-  			alert("You friccin moron.");
+  	//updates button text and questions every time the button is pressed
+
+  	function updateQuestion() {
+		//e.preventDefault();
+		if (currentIndex === 9) {
+  			alert("You have reached the end of the test.");
   		}
 		else {
 			currentIndex++;
+			$('.answer-option').css("background-color", "#EEE");
 			setQuestions();
-		}  		
+			setButton();
+			setCircle();
+		} 
+  	}
+
+  	function submitAction() {
+  		if (answerValue === dummyQuestions[currentIndex].correct) {
+  			$('#'+answerValue).css("background-color","green");
+  			console.log(answerValue);
+  			console.log("correct answer");
+  		}
+  		else {
+  			$('#'+answerValue).css("background-color","red");
+  		}
+  		setTimeout(updateQuestion,1500);
+  		console.log("after timeout");
+  	
+  	}
+
+  	$('.submitbtn').on('click', (e) => {
+  		submitAction();
   	})
 
-
-	
 });
