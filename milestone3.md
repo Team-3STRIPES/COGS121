@@ -41,5 +41,5 @@ This page is the same as milestone 2.
 <br />
 We cleaned up this page as well to better match the original prototype. We did change things from the prototype however, in that we will only be allowing users to advance forward in the questions, rather than what we had planned before which allowed them to maneuver freely forwards and backwards between the questions.
 
-### Backend Technologies Used
+## Backend Technologies
 Our team decided to move forward with using Google Firebase for deploying our web application and data storage. We decided to use Google Firebase because it offers a built in user authentication framework that could be easily integrated within our application. To help with the slang translations, we decided to use a few more APIs including: Twitter's API for gathering sentences that potentially contained slang, UrbanDictionary's API for getting definition of slang words, Datamuse's API for performing a reverse definition look-up, and spaCY Named Entity Recognizer model for detecting slang within text.
