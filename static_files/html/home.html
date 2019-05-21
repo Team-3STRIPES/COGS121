@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="home.js"></script>
-    <script src="login.js"></script>
+    <script src="auth.js"></script>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
 
@@ -79,13 +79,5 @@
       <h2 class="subtitle">Definitions</h2>
       <p class="definition"><span class="definition-term">lmk</span> let me know</p>
     </div>
-    <p id="firebase-data"></p>
   </body>
-  <script type="text/javascript">
-    $(document).ready(function() {
-      let asd = $.get('https://cogs121-c88c5.firebaseio.com/.json', function(data) {
-        document.getElementById('firebase-data').innerHTML = JSON.stringify(data.slice(0,10));
-      });
-    });
-  </script>
 </html>

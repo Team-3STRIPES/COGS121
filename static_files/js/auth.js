@@ -18,4 +18,13 @@ $(document).ready(() => {
     });
   });
 
+  $('#signout').on('click', (e) => {
+    firebase.auth().signOut().then(function() {
+      $('#signedin').css('display', 'none');
+      $('#signedout').css('display', 'flex');
+    }).catch(function(error) {
+      // An error happened.
+    });
+  });
+
 });
