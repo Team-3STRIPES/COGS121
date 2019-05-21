@@ -1,8 +1,7 @@
 var http = require('http'),
     express = require('express'),
     path = require('path'),
-    bodyParser = require('body-parser'),
-    ud = require('urban-dictionary');
+    bodyParser = require('body-parser');
 
 const PORT = 1500
 
@@ -39,15 +38,6 @@ app.get('/def', function(req, res) {
       console.log('on data')
     	res.send({'def': data.toString('utf8')});
     });
-	// ud.term(req.query.def).then((result) => {
-	// 	console.log(req.query.def);
-	// 	const entries = result.entries;
-	// 	res.send({'word': entries[0].word,
-	// 			  'def': entries[0].definition,
-	// 			  'example': entries[0].example});
-	// }).catch((error) => {
-	// 	res.status(500).send({'word': req.query.def});
-	// })
 })
 
 
