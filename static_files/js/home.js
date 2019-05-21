@@ -74,4 +74,13 @@ $(document).ready(() => {
     });
   }
 
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      $('#signedout').css('display', 'none');
+      $('#signedin').css('display', 'flex');
+    } else {
+      $('#signedin').css('display', 'none');
+      $('#signedout').css('display', 'flex');
+    }
+  });
 });
