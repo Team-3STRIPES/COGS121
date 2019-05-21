@@ -126,7 +126,7 @@ $(document).ready(() => {
   	}
 
   	setQuestions();
-  	setButton(); 
+  	setButton();
   	setCircle();
 
 
@@ -137,45 +137,44 @@ $(document).ready(() => {
   		$('.answer-option').css("background-color", "#EEE");
   		$(this).css("background-color", "#f7d345");
   		answerValue = $(this).attr('id');
-  		console.log(answerValue);
-
   	})
 
   	//updates button text and questions every time the button is pressed
 
   	function updateQuestion() {
-		//e.preventDefault();
-		if (currentIndex === 9) {
-  			alert("You have reached the end of the test.");
+  		//e.preventDefault();
+  		if (currentIndex === 9) {
+    			alert("You have reached the end of the test.");
+    		}
+  		else {
+  			currentIndex++;
+        answerValue = null;
+  			$('.answer-option').css("background-color", "#EEE");
+  			setQuestions();
+  			setButton();
+  			setCircle();
   		}
-		else {
-			currentIndex++;
-			$('.answer-option').css("background-color", "#EEE");
-			setQuestions();
-			setButton();
-			setCircle();
-		} 
   	}
 
   	function submitAction() {
   		if (answerValue === dummyQuestions[currentIndex].correct) {
-  			$('#'+answerValue).css("background-color","green");
+  			$('#'+answerValue).css("background-color","#7aea6b");
   			console.log(answerValue);
-  			console.log("correct answer");
   		}
   		else {
-  			$('#'+answerValue).css("background-color","red");
+  			$('#'+dummyQuestions[currentIndex].correct).css("background-color","#7aea6b");
+  			$('#'+answerValue).css("background-color","#e2685a");
   		}
   		setTimeout(updateQuestion,1500);
-  		console.log("after timeout");
-  	
   	}
 
   	$('.submitbtn').on('click', (e) => {
+      if(!answerValue) {
+        alert("You must select an answer.");
+        return;
+      }
   		submitAction();
   	})
 
 
 	})
-
-
