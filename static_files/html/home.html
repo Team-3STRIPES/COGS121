@@ -7,9 +7,13 @@
     <link rel="stylesheet" href="home.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="home.js">
-    </script><!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="home.js"></script>
+    <script src="login.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-firestore.js"></script>
     <script>
     // Your web app's Firebase configuration
     var firebaseConfig = {
@@ -28,9 +32,12 @@
   <body>
     <nav>
       <h1 class="logo">translator</h1>
-      <div class="nav-options">
+      <div class="nav-options" id="signedin" style="display: none;">
         <a class="nav-option" id="profile" href="profile.html">PROFILE</a>
         <a class="nav-option" id="signout" href="#">SIGN OUT</a>
+      </div>
+      <div class="nav-options" id="signedout">
+        <a class="nav-option" id="login" href="#">LOG IN</a>
       </div>
     </nav>
     <div class="translation-section">

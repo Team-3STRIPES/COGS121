@@ -74,12 +74,4 @@ $(document).ready(() => {
     });
   }
 
-  $('#signout').on('click', () => {
-    $('#profile').remove();
-    $('#signout').text('LOG IN');
-    setTimeout(() => {
-      $('#signout').attr('href', 'login.html');
-    }, 0);
-  })
-
 });
