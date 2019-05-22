@@ -27,7 +27,6 @@ def convert_dataturks_to_spacy(dataturks_JSON_FilePath):
                     #dataturks indices are both inclusive [start, end] but spacy is not [start, end)
                     entities.append((point['start'], point['end'] + 1 ,label))
 
-
             training_data.append((text, {"entities" : entities}))
         return training_data
     except Exception as e:
@@ -36,7 +35,7 @@ def convert_dataturks_to_spacy(dataturks_JSON_FilePath):
 
 
 def train_spacy():
-    TRAIN_DATA = convert_dataturks_to_spacy("twitter_data/dataset_1.json");
+    TRAIN_DATA = convert_dataturks_to_spacy("../twitter_data/dataset_1.json");
     nlp = spacy.blank('en')  # create blank Language class
     # create the built-in pipeline components and add them to the pipeline
     # nlp.create_pipe works for built-ins that are registered with spaCy
@@ -53,7 +52,7 @@ def train_spacy():
     other_pipes = [pipe for pipe in nlp.pipe_names if pipe != 'ner']
     with nlp.disable_pipes(*other_pipes):  # only train NER
         optimizer = nlp.begin_training()
-        for itn in range(1):
+        for itn in range(2):
             print("Starting iteration " + str(itn))
             random.shuffle(TRAIN_DATA)
             losses = {}
@@ -61,13 +60,14 @@ def train_spacy():
                 nlp.update(
                     [text],  # batch of texts
                     [annotations],  # batch of annotations
-                    drop=0.15,  # dropout - make it harder to memorise data
+                    drop=0.2,  # dropout - make it harder to memorise data
                     sgd=optimizer,  # callable to update weights
                     losses=losses)
             print(losses)
+    nlp.to_disk("./model")
     
     #do prediction
-    text = "the house was on fire."
+    text = "damn you're swole"
     print(text)
     doc = nlp(text)
     print ("Entities= " + str(["" + str(ent.text) + "_" + str(ent.label_) for ent in doc.ents]))

@@ -36,7 +36,8 @@ app.get('/def', function(req, res) {
 
     transcription.stdout.on('data', (data)=>{
       console.log('on data')
-    	res.send({'def': data.toString('utf8')});
+      data = data.toString('utf8')
+    	res.send({'def': data});
     });
 })
 
