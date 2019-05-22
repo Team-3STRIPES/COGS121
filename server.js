@@ -32,12 +32,11 @@ app.get('/test', function(req, res){
 
 app.get('/def', function(req, res) {
 	  let spawn = require("child_process").spawn;
-    let transcription = spawn('python',["python_scripts/word_to_def.py", req.query.def]);
-
-    transcription.stdout.on('data', (data)=>{
+    let child = spawn('py',["python_scripts/word_to_def.py", req.query.def]);
+    
+    child.stdout.on('data', (data)=>{
       console.log('on data')
-      data = data.toString('utf8')
-    	res.send({'def': data});
+    	res.send({'def': data.toString('utf8')});
     });
 })
 

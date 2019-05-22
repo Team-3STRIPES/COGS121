@@ -12,7 +12,7 @@ rl_url = 'https://api.datamuse.com/words?ml='
 dict_url = 'https://www.dictionary.com/e/slang/'
 
 def predict(text):
-    nlp = spacy.load("./model")
+    nlp = spacy.load("./python_scripts/model")
     doc = nlp(text)
     return [ent.text.lower() for ent in doc.ents]
 
@@ -91,7 +91,7 @@ def query2(sentence):
 				sent_list[i] = new_word
 
 	new_sentence = " ".join(str(x) for x in sent_list)
-	print(new_sentence)
+	print(new_sentence, flush=True)
 
 
 
