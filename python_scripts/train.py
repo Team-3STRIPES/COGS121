@@ -35,7 +35,7 @@ def convert_dataturks_to_spacy(dataturks_JSON_FilePath):
 
 
 def train_spacy():
-    TRAIN_DATA = convert_dataturks_to_spacy("../twitter_data/dataset_1.json");
+    TRAIN_DATA = convert_dataturks_to_spacy("../twitter_data/slang5.json");
     nlp = spacy.blank('en')  # create blank Language class
     # create the built-in pipeline components and add them to the pipeline
     # nlp.create_pipe works for built-ins that are registered with spaCy
@@ -67,7 +67,7 @@ def train_spacy():
     nlp.to_disk("./model")
     
     #do prediction
-    text = "damn you're swole"
+    text = "damn you're swole bruh"
     print(text)
     doc = nlp(text)
     print ("Entities= " + str(["" + str(ent.text) + "_" + str(ent.label_) for ent in doc.ents]))
