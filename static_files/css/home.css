@@ -12,7 +12,12 @@ nav {
   flex-direction: row;
   justify-content: space-between;
   align-content: center;
+  height: 50px;
   margin: 2% 3%;
+}
+
+nav img {
+  height: 100%;
 }
 
 .nav-options {
@@ -43,10 +48,8 @@ nav {
   background-color: #EEE;
 }
 
-h1.logo {
-  font-size: 2.5em;
-  text-align: center;
-  font-weight: 400;
+.logo {
+
 }
 
 .translation-section {
