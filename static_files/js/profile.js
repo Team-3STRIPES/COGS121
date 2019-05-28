@@ -34,8 +34,7 @@ $(document).ready(() => {
       $('.profile-name').first().text(user.displayName);
       let userRef = firebase.firestore().collection('users').doc(user.uid);
       userRef.get().then((doc) => {
-        //let wordCount = doc.data().wordCount;
-        let wordCount = 500;
+        let wordCount = doc.data().wordCount;
         let level;
 
         // determine user's level
