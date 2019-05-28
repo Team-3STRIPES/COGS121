@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="161px" height="54px" viewBox="0 0 161 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Translangtor</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Mobile" transform="translate(-97.000000, -37.000000)">
+            <g id="Translangtor" transform="translate(8.000000, 7.000000)">
+                <text id="tran" font-family="Oxygen-Regular, Oxygen" font-size="24" font-weight="normal" fill="#4A4A4A">
+                    <tspan x="101.708984" y="25">tran</tspan>
+                </text>
+                <text id="slang" font-family="Oxygen-Regular, Oxygen" font-size="24" font-weight="normal" fill="#F7D345">
+                    <tspan x="145.755859" y="59">slang</tspan>
+                </text>
+                <text id="tor" font-family="Oxygen-Regular, Oxygen" font-size="24" font-weight="normal" fill="#4A4A4A">
+                    <tspan x="204.996094" y="26">tor</tspan>
+                </text>
+                <path d="M90.5,79.5 L143.5,79.5" id="Line-3" stroke="#F7D345" stroke-width="3" stroke-linecap="square"></path>
+                <path d="M90.5,34.5 L199.5,34.5" id="Line" stroke="#F7D345" stroke-width="3"></path>
+                <path id="Line-decoration-1" d="M188.7,37.5 L199.5,34.5 L188.7,31.5" stroke="#F7D345" stroke-width="3"></path>
+                <path d="M90.5,34.5 L90.5,79.5" id="Line-2" stroke="#F7D345" stroke-width="3" stroke-linecap="square"></path>
+                <path d="M210.5,35.5 L248.5,35.5" id="Line-3" stroke="#666666" stroke-width="3" stroke-linecap="square"></path>
+                <path d="M152.5,79.5 L248.5,79.5" id="Line" stroke="#666666" stroke-width="3" transform="translate(200.500000, 79.500000) scale(-1, 1) translate(-200.500000, -79.500000) "></path>
+                <path id="Line-decoration-1" d="M237.7,82.5 L248.5,79.5 L237.7,76.5" stroke="#666666" stroke-width="3"></path>
+                <path d="M248.5,37.5 L248.5,79.5" id="Line-2" stroke="#666666" stroke-width="3" stroke-linecap="square"></path>
+            </g>
+        </g>
+    </g>
+</svg>
