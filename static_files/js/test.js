@@ -3,104 +3,45 @@ $(document).ready(() => {
 	let currentIndex = 0;
 	let answerValue;
 
-	const dummyQuestions = [
-		{
-			question: 'What does lit mean?',
-			a1: 'amazing; spectacular; very good',
-			a2: 'terrible, depressing',
-			a3: 'to light a candle',
-			a4: 'bright; luminescent',
-			correct: 'a1'
+	// pulls test questions from Firebase
+	let fake_answers = [], test_bank = [], dummyQuestions = [];
+	const FIREBASE_URL = 'https://firestore.googleapis.com/v1/projects/cogs121-c88c5/databases/(default)/documents/question_set/question_set';
+	$.get(FIREBASE_URL, function(data) {
+		// cleans up the JSON (original data can be viewed at FIREBASE_URL)
+		fake_answers = data.fields.fake_questions.arrayValue.values.map((val) => val.stringValue);
+		test_bank = data.fields.test_bank.arrayValue.values.map((val) => [
+			val.mapValue.fields.term.stringValue,
+			val.mapValue.fields.definition.stringValue
+		]);
+		// for each question
+		for (qIndex in test_bank) {
+			const qitem = test_bank[qIndex];
+			const term = qitem[0], definition = qitem[1];
+			// random answer index for correct definition
+			const trueIndex = 1 + Math.floor(Math.random() * 4);
+			// creates the answer array
+			let options = fake_answers
+				.filter((fAns) => fAns !== definition)
+				.sort(() => 0.5 - Math.random())
+				.slice(0, 3);
+			options.splice(trueIndex - 1, 0, definition);
+			// maintains original dummyQuestions schema
+			let jobj = {
+				question: `What does \"${term}\" mean?`,
+				correct: 'a' + trueIndex
+			};
+			for (o in options) {
+				const shifted = parseInt(o) + 1;
+				jobj['a' + shifted] = options[o];
+			}
+			dummyQuestions.push(jobj);
+		}
+		// must be in the callback because it depends on dummyQuestions, which is populated above
+		setQuestions();
+	});
 
-		},
-		{
-			question: 'What does "fire" mean?',
-			a1: 'burning',
-			a2: 'extremely amazing; fantastic',
-			a3: 'to light a candle',
-			a4: 'bright; luminescent',
-			correct: 'a2'
-
-
-		},
-		{
-			question: 'What does "kickback" mean?',
-			a1: 'kicking someone backwards',
-			a2: 'terrible, depressing',
-			a3: 'a party',
-			a4: 'bright; luminescent',
-			correct: 'a3'
-
-		},
-		{
-			question: 'What does "yeet" mean?',
-			a1: 'good',
-			a2: 'alright',
-			a3: 'terrible',
-			a4: 'an herbal medicine',
-			correct: 'a2'
-
-
-		},
-		{
-			question: 'What does "stan" mean?',
-			a1: 'good',
-			a2: 'alright',
-			a3: 'terrible',
-			a4: 'stalker fan; passionately obsessed with something',
-			correct: 'a4'
-
-		},
-		{
-			question: 'What does "on fleek" mean?',
-			a1: 'good',
-			a2: 'bad',
-			a3: 'perfect; great',
-			a4: 'an herbal medicine',
-			correct: 'a3'
-
-		},
-		{
-			question: 'What does "finna" mean?',
-			a1: 'good',
-			a2: 'fixing to',
-			a3: 'perfect; great',
-			a4: 'an herbal medicine',
-			correct: 'a2'
-
-
-		},
-		{
-			question: 'What does "highkey" mean?',
-			a1: 'good',
-			a2: 'bad',
-			a3: 'extremely; obviously',
-			a4: 'an herbal medicine',
-			correct: 'a3'
-
-
-		},
-		{
-			question: 'What does "lowkey" mean?',
-			a1: 'good',
-			a2: 'bad',
-			a3: 'discretely; not obviously',
-			a4: 'an herbal medicine',
-			correct: 'a3'
-
-
-		},
-		{
-			question: 'What does "fam" mean?',
-			a1: 'good',
-			a2: 'bad',
-			a3: 'perfect; great',
-			a4: 'family',
-			correct: 'a4'
-
-
-		},
-	];
+	setButton();
+	setCircle();
 
 	function setQuestions() {
 	    $('#question').text(dummyQuestions[currentIndex].question);
@@ -124,12 +65,6 @@ $(document).ready(() => {
 				$('.progress-circle').eq(i).css("background-color", "#EEE");
 			}
   	}
-
-  	setQuestions();
-  	setButton();
-  	setCircle();
-
-
 
   	// marks selected as yellow, not selected as gray
 
