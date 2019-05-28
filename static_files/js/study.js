@@ -3,13 +3,13 @@ $(document).ready(() => {
 	let currentIndex = 0;
 
 	let dummyCards = [];
-	const FIREBASE_URL = 'https://firestore.googleapis.com/v1/projects/cogs121-c88c5/databases/(default)/documents/question_set/flashcards';
+	const FIREBASE_URL = 'https://firestore.googleapis.com/v1/projects/cogs121-c88c5/databases/(default)/documents/flashcards';
 	$.get(FIREBASE_URL, function(data) {
 		// cleans up the JSON (original data can be viewed at FIREBASE_URL)
-		const cards = data.fields.flashcards.arrayValue.values.map((val) => [
-			val.mapValue.fields.term.stringValue,
-			val.mapValue.fields.definition.stringValue,
-			val.mapValue.fields.example.stringValue
+		const cards = data.documents.map((val) => [
+			val.fields.term.stringValue,
+			val.fields.definition.stringValue,
+			val.fields.example.stringValue
 		]);
 		// for each card
 		for (cIndex in cards) {
