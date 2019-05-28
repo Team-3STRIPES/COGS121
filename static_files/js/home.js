@@ -74,7 +74,7 @@ $(document).ready(() => {
     });
   }
 
-  firebase.auth().onAuthStateChanged(function(user) {
+  firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       $('#signedout').css('display', 'none');
       $('#signedin').css('display', 'flex');

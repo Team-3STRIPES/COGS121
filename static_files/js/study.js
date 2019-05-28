@@ -68,7 +68,7 @@ $(document).ready(() => {
 	$('.right-arrow').on('click', () => {
 		currentIndex = (currentIndex + dummyCards.length - 2) % dummyCards.length;
 		$('.flash-card').first().animate({
-			opacity: 0, 
+			opacity: 0,
 			left: '+=100'
 		}, 500, fadeRightCard)
 		$('#flash-card-index').text(currentIndex + 1)
