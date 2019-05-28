@@ -31,6 +31,7 @@ $(document).ready(() => {
 
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
+      // set star name
       $('.profile-name').first().text(user.displayName);
       let userRef = firebase.firestore().collection('users').doc(user.uid);
       userRef.get().then((doc) => {
@@ -46,8 +47,9 @@ $(document).ready(() => {
         else level = "Diamond";
 
         $('#profile-level').text(level);
-        $star = $('.fa-star').first();
+        let $star = $('.fa-star').first();
 
+        // set star color
         switch(level) {
           case "Iron":
             $star.css('color', '#726358');
@@ -71,6 +73,14 @@ $(document).ready(() => {
             console.log("something broke.");
             break;
         }
+      });
+
+      // set history
+      let $history = $('#history-list');
+      userRef.collection('history').get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          $history.append(`<li><span class="term">${doc.data().word}</span> &mdash; <span class="term-def">${doc.data().definition}</span></li>`);
+        })
       });
     } else {
       window.location.href = "home.html";
