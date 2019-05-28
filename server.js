@@ -31,6 +31,7 @@ app.get('/test', function(req, res){
 })
 
 app.get('/def', function(req, res) {
+<<<<<<< HEAD
   console.log("def got pinged")
   let spawn = require("child_process").spawn;
   let child = spawn('py',["python_scripts/word_to_def.py", req.query.def]);
@@ -56,6 +57,15 @@ app.get('/slang', function(req,res) {
 app.post('/hist', function(req,res) {
   console.log("hist got pinged")
   console.log(req.body.def);
+=======
+	  let spawn = require("child_process").spawn;
+    let child = spawn('python',["python_scripts/word_to_def.py", req.query.def]);
+
+    child.stdout.on('data', (data)=>{
+      console.log('on data')
+    	res.send({'def': data.toString('utf8')});
+    });
+>>>>>>> 382b2bb8564b6c366739f55e50527845591be649
 })
 
 

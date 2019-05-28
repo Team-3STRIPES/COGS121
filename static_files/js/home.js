@@ -45,6 +45,10 @@ $(document).ready(() => {
     reqHist();
   }
 
+  function updateDefinitions() {
+    
+  }
+
   function reqDefinition() {
     let loadingMsg = 'Translating..';
     const maxTimes = 5;
@@ -70,6 +74,7 @@ $(document).ready(() => {
         finalMessage = data.def;
         clearInterval(loading);
         displayTranslation();
+        updateDefinitions();
       },
       error: (jqXHR, textStatus, errorThrown) => {
         let word = jqXHR.responseJSON.word;
@@ -96,7 +101,7 @@ $(document).ready(() => {
     });
   }
 
-  firebase.auth().onAuthStateChanged(function(user) {
+  firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       $('#signedout').css('display', 'none');
       $('#signedin').css('display', 'flex');
