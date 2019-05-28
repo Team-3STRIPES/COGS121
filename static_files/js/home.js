@@ -16,7 +16,7 @@ $(document).ready(() => {
 
   $inputBox.on('keyup', () => {
     clearTimeout(countDownTimer);
-    countDownTimer = setTimeout(reqDefinition, 500);
+    countDownTimer = setTimeout(requests, 500);
   });
 
   $('.f-to-s').on('click', () => {
@@ -37,6 +37,12 @@ $(document).ready(() => {
       $outputBox.css('color', '#999');
     }
     $outputBox.val(finalMessage);
+  }
+
+  function requests() {
+    reqDefinition();
+    reqSlang();
+    reqHist();
   }
 
   function reqDefinition() {
@@ -70,6 +76,22 @@ $(document).ready(() => {
         finalMessage = word;
         clearInterval(loading);
         displayTranslation();
+      }
+    });
+  }
+
+  function reqSlang() {
+    $.ajax({
+      url: "/slang",
+      type: "GET",
+      data: {
+              def: userInput,
+            },
+      success: (data, textStatus, jqXHR) => {
+        //data.words is the words separated by '+'
+      },
+      error: (jqXHR, textStatus, errorThrown) => {
+       
       }
     });
   }
