@@ -40,6 +40,32 @@
   padding: 5px 4%;
 }
 
+#trans-history {
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+#trans-history h4 {
+  font-size: 2em;
+  border-top: 8px solid #F7D345;
+  margin-top: 2%;
+  padding-top: 4%;
+  padding-bottom: 2%;
+}
+
+#history-list {
+  margin-left: 8%;
+}
+
+#history-list li {
+  font-size: 1.25em;
+  font-weight: 300;
+}
+
+#history-list .term {
+  font-weight: 400;
+}
+
 .profile-name {
   font-size: 3em;
 }
