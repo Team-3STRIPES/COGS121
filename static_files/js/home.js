@@ -1,5 +1,5 @@
 $(document).ready(() => {
-
+  let userID;
   let userInput;
   let finalMessage;
   let countDownTimer;
@@ -94,6 +94,26 @@ $(document).ready(() => {
             },
       success: (data, textStatus, jqXHR) => {
         //data.words is the words separated by '+'
+        let words = data.words.trim().split("+");
+        if (words.length > 0 && words[0] !== "") {
+          for (let i = 0; i < words.length; i++) {
+            firebase.firestore().collection('users').doc(userID).collection('words').doc(words[i]).set({
+              word: words[i]
+            })
+          }
+        }
+        let $definition = $('#definition-section');
+        $definition.html(`<h2 class="subtitle">Definitions</h2>`);
+        for (let i = 0; i < words.length; i++) {
+          firebase.firestore().collection('definition').where("word", "==", words[i])
+            .get().then(function (querySnapshot) {
+              querySnapshot.forEach((doc) => {
+                console.log("pls work")
+                $definition.append(`<p class="definition"><span class="definition-term">${doc.data().word}</span> 
+                  ${doc.data().def}</p>`);
+            });    
+          });
+        }
       },
       error: (jqXHR, textStatus, errorThrown) => {
        
@@ -101,8 +121,16 @@ $(document).ready(() => {
     });
   }
 
+  function reqHist() {
+    console.log(userID);
+    firebase.firestore().collection('users').doc(userID).collection('history').doc(userInput).set({
+      sentence: userInput
+    }); 
+  }
+
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
+      userID = user.uid;
       $('#signedout').css('display', 'none');
       $('#signedin').css('display', 'flex');
     } else {

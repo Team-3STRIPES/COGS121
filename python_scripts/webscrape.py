@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 import re
 
 dict_url = 'https://www.dictionary.com/e/slang/'
-word = 'ad hoc'
+word = 'jesus take the wheel'
 
 
 def write_content(examples):
@@ -68,7 +68,7 @@ def get_defs():
 	data = {
 		'definition': [],
 	}
-	new_url = dict_url + "ad-hoc"
+	new_url = dict_url + "jesus-take-the-wheel"
 	while (True):
 		try:
 			html = requests.get(new_url).text
@@ -104,7 +104,7 @@ def get_defs():
 			
 		except:
 			continue
-	with open("../twitter_data/definitions.json", 'a') as outfile:
+	with open("../twitter_data/definitions2.json", 'a') as outfile:
 			json_data = json.dumps(data)
 			outfile.write(json_data)
 
