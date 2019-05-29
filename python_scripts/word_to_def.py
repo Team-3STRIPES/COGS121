@@ -5,7 +5,7 @@ import sys
 import spacy
 import sys
 from bs4 import BeautifulSoup
-
+from googletrans import Translator
 
 ud_url = 'http://api.urbandictionary.com/v0/define?term='
 rl_url = 'https://api.datamuse.com/words?ml='
@@ -94,12 +94,17 @@ def query2(sentence):
 	print(new_sentence, flush=True)
 
 
-
+def query3(sentence):
+	translator = Translator()
+	sentence = translator.translate(sentence, dest="zh-tw").text
+	sentence = translator.translate(sentence).text
+	print(sentence)
 
 
 if __name__ == '__main__':
 	sentence = str(sys.argv[1])
 	#query(sentence)
-	query2(sentence)
+	#query2(sentence)
+	query3(sentence)
 
 #article-word__header__content__holder
