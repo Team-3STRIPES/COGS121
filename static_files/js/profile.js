@@ -77,9 +77,15 @@ $(document).ready(() => {
 
       // set history
       let $history = $('#history-list');
-      userRef.collection('history').get().then((querySnapshot) => {
+      userRef.collection('words').get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          $history.append(`<li>${doc.data().sentence}</li>`);
+          //$history.append(`<li><span class="term">${doc.data().word}</span> &mdash; <span class="term-def">${doc.data().definition}</span></li>`);
+          firebase.firestore().collection('definition').where("word", "==", doc.data().word)
+            .get().then(function (querySnapshot2) {
+              querySnapshot2.forEach((doc2) => {
+                $history.append(`<li><span class="term">${doc2.data().word}</span> &mdash; <span class="term-def">${doc2.data().definition}</span></li>`);
+            });    
+          });
         })
       })
     } else {
