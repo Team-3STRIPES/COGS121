@@ -3,6 +3,7 @@
 	<head>
 		<title>Profile</title>
 		<meta charset="utf-8">
+    <link rel="icon" href="translangtor_favicon.png">
     <link rel="stylesheet" type="text/css" href="profile.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous"><link href="https://fonts.googleapis.com/css?family=Oxygen:300,400,700" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
@@ -36,19 +37,9 @@
     </a>
 		<div class="main-section">
       <div class="profile-section">
-  			<div class="profile-image">
-          <img src="avatar.png">
-        </div>
-        <div class="profile-info">
-          <p class="profile-name">Ebenezer Cade</p>
-    			<p class="profile-streak"><i class="fas fa-fire-alt"></i> Streak: 16 days</p>
-        </div>
-        <div class="profile-stats">
-    			<p class="profile-level"><i class="fas fa-star"></i> Gold Level</p>
-    			<p class="profile-highest-streak"><span id="highest-streak-num">31</span> Highest Streak</p>
-        </div>
+        <p class="profile-name"></p>
+  			<p class="profile-level"><i class="fas fa-star"></i> <span id="profile-level"></span> Level</p>
       </div>
-			<button class="edit-button"><i class="far fa-edit"></i> Edit Profile</button>
       <div class="profile-buttons">
   			<a class="my-button" href="study.html">
           <div class="profile-nav-button">
@@ -61,14 +52,11 @@
           </div>
         </a>
       </div>
-		</div>
-    <div id="profile-edit-modal">
-      <div class="profile-edit-modal-box">
-        <form>
-          New Name: <input type="text" id="new-name" placeholder="Ebenezer Cade">
-        </form>
-        <button class="submit-button">Submit</button>
+      <div class="profile-section" id="trans-history">
+        <h4>Translation History</h4>
+        <ul id="history-list">
+        </ul>
       </div>
-    <div>
+		</div>
 	</body>
 </html>

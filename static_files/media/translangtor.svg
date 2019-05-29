@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1054px" height="257px" viewBox="0 0 1054 257" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53 (72520) - https://sketchapp.com -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <text id="translangtor" font-family="Oxygen-Regular, Oxygen" font-size="140" font-weight="normal">
+            <tspan x="147" y="174" fill="#666666">tran</tspan>
+            <tspan x="401.228516" y="174" fill="#F7D345">slang</tspan>
+            <tspan x="742.410156" y="174" fill="#666666">tor</tspan>
+        </text>
+        <polygon id="Path-4" fill="#F7D345" points="725 23.5 737 29 725 35.5 716 33"></polygon>
+        <g id="Group" transform="translate(6.000000, 6.000000)" stroke="#F7D345" stroke-width="12">
+            <polyline id="Path-2" points="377 221 -5.68434189e-14 221 -5.68434189e-14 24 717 23"></polyline>
+            <path d="M666,0 L717,23" id="Path-3"></path>
+            <path d="M666,24 L717,47" id="Path-3-Copy" transform="translate(691.500000, 35.500000) scale(1, -1) translate(-691.500000, -35.500000) "></path>
+        </g>
+        <g id="Group-Copy" transform="translate(728.500000, 140.000000) scale(-1, -1) translate(-728.500000, -140.000000) translate(409.000000, 29.000000)" stroke="#666666">
+            <polyline id="Path-2" stroke-width="12" points="285.564854 222 0 222 0 25 624 25"></polyline>
+            <path d="M573,2.27373675e-13 L624,23" id="Path-3" stroke-width="12"></path>
+            <polyline id="Path-3-Copy" stroke-width="12" transform="translate(598.500000, 36.500000) scale(1, -1) translate(-598.500000, -36.500000) " points="573 25 589.397059 32.3947522 624 48"></polyline>
+            <polygon id="Path-4-Copy" fill="#666666" points="626 17.5 639 23.5 627 30 618 27.5"></polygon>
+        </g>
+    </g>
+</svg>
