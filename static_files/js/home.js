@@ -16,7 +16,7 @@ $(document).ready(() => {
 
   $inputBox.on('keyup', () => {
     clearTimeout(countDownTimer);
-    countDownTimer = setTimeout(reqDefinition, 500);
+    countDownTimer = setTimeout(requests, 500);
   });
 
   $('.f-to-s').on('click', () => {
@@ -37,6 +37,16 @@ $(document).ready(() => {
       $outputBox.css('color', '#999');
     }
     $outputBox.val(finalMessage);
+  }
+
+  function requests() {
+    reqDefinition();
+    reqSlang();
+    reqHist();
+  }
+
+  function updateDefinitions() {
+    
   }
 
   function reqDefinition() {
@@ -64,6 +74,7 @@ $(document).ready(() => {
         finalMessage = data.def;
         clearInterval(loading);
         displayTranslation();
+        updateDefinitions();
       },
       error: (jqXHR, textStatus, errorThrown) => {
         let word = jqXHR.responseJSON.word;
@@ -74,7 +85,23 @@ $(document).ready(() => {
     });
   }
 
-  firebase.auth().onAuthStateChanged(function(user) {
+  function reqSlang() {
+    $.ajax({
+      url: "/slang",
+      type: "GET",
+      data: {
+              def: userInput,
+            },
+      success: (data, textStatus, jqXHR) => {
+        //data.words is the words separated by '+'
+      },
+      error: (jqXHR, textStatus, errorThrown) => {
+       
+      }
+    });
+  }
+
+  firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       $('#signedout').css('display', 'none');
       $('#signedin').css('display', 'flex');

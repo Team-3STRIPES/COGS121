@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Home</title>
+    <link rel="icon" href="translangtor_favicon.png">
     <link href="https://fonts.googleapis.com/css?family=Oxygen:300,400,700" rel="stylesheet">
     <link rel="stylesheet" href="home.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -31,7 +32,7 @@
   </head>
   <body>
     <nav>
-      <h1 class="logo">translator</h1>
+      <img src="translangtor.svg" alt="translangtor" title="translangtor">
       <div class="nav-options" id="signedin" style="display: none;">
         <a class="nav-option" id="profile" href="profile.html">PROFILE</a>
         <a class="nav-option" id="signout" href="#">SIGN OUT</a>
@@ -43,8 +44,7 @@
     <div class="translation-section">
       <div class="translate-square">
         <div class="translate-state" id="left-state">
-          <a class="translate-state-opt s-to-f active" href="#s-to-f">SLANG</a>
-          <a class="translate-state-opt f-to-s" href="#f-to-s">FORMAL</a>
+          <p class="translate-state-opt s-to-f active" href="#s-to-f">SLANG</p>
         </div>
         <div class="translate-input">
           <textarea id="left-text"></textarea>
@@ -57,8 +57,7 @@
       </div>
       <div class="translate-square">
         <div class="translate-state" id="right-state">
-          <a class="translate-state-opt f-to-s" href="#f-to-s">SLANG</a>
-          <a class="translate-state-opt s-to-f active" href="#s-to-f">FORMAL</a>
+          <p class="translate-state-opt s-to-f active" href="#s-to-f">FORMAL</p>
         </div>
         <div class="translate-input">
           <textarea id="right-text" readonly>Translation</textarea>
@@ -67,11 +66,6 @@
           </a>
         </div>
         <div class="translate-footer-right">
-          <div>
-            <p>Is this a good translation?</p>
-            <a href="#good" id="good">Yes</a>
-            <a href="#bad" id="bad">No</a>
-          </div>
         </div>
       </div>
     </div>
