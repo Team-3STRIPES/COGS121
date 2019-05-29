@@ -114,7 +114,7 @@ $(document).ready(() => {
               querySnapshot.forEach((doc) => {
                 console.log(doc.data().word)
                 console.log(doc.data().def)
-                $definition.append(`<p class="definition"><span class="definition-term">${doc.data().word}</span> 
+                $definition.append(`<p class="definition"><span class="definition-term">${doc.data().word} &mdash; </span> 
                   ${doc.data().def}</p>`);
             });    
           });
