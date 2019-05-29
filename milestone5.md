@@ -45,7 +45,7 @@ We implemented our data displays using AJAX requests to retrieve data, some addi
 Future releases would prioritize user-specific features, e.g. a history of translations and statistics such as commonly-translated words (for the user and regionally/globally). The translation history could be a simple two-column table with original inputs and then translations, which we could fold into our current AJAX request every time a translation is made, and the user statistics could be implemented using some more complex Firebase queries and a data visualization library such as [D3.js](https://d3js.org/).
 
 ## Purpose of "Translangtor"
-The purpose of our slang translator would aid non-millenials in understanding current slang that they may be unfamiliar with. 
+The purpose of our slang translator would aid non-millenials, such as parents, in understanding current slang that they may be unfamiliar with. 
 For example: Janine, while relaxing at home, noticed her son tweeted the word "lit" on Twitter as she was scrolling through social media. 
 Janine doesn't know what "lit" means. Concerned that he might be using profanity that she's unaware of, Janine grabs her laptop 
 and searches for the "Translangtor". She logs into her account through Google and types in "lit" into the translator. After a couple seconds, 
