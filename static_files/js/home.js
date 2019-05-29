@@ -106,12 +106,14 @@ $(document).ready(() => {
             })
           }
         }
-        let $definition = $('#definition-section');
+        let $definition = $('.definition-section');
         $definition.html(`<h2 class="subtitle">Definitions</h2>`);
         for (let i = 0; i < words.length; i++) {
           firebase.firestore().collection('definition').where("word", "==", words[i])
             .get().then(function (querySnapshot) {
               querySnapshot.forEach((doc) => {
+                console.log(doc.data().word)
+                console.log(doc.data().def)
                 $definition.append(`<p class="definition"><span class="definition-term">${doc.data().word}</span> 
                   ${doc.data().def}</p>`);
             });    
