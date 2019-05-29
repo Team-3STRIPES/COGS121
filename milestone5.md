@@ -5,16 +5,24 @@ Edward Chen, Eunice Chan, Nathaniel Qin, and Sumeet Bansal
 
 ## UI Progress
 ### Home Page
-Insert screenshot & explanation
+<br />
+<img src="milestone_images/milestone5/home.html.png">
+<br />
 
 ### Profile Page
-Insert screenshot & explanation
+<br />
+<img src="milestone_images/milestone5/profile.html.png">
+<br />
 
 ### Study Page
-Insert screenshot & explanation
+<br />
+<img src="milestone_images/milestone5/study.html.png">
+<br />
 
 ### Test Page
-Insert screenshot & explanation
+<br />
+<img src="milestone_images/milestone5/test.html.png">
+<br />
 
 ### Data Visualization
 Our Firestore data is visualized in our Study Flash Cards and Test Yourself functionalities, pictured below in that order:
