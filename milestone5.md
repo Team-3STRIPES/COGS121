@@ -9,20 +9,28 @@ Edward Chen, Eunice Chan, Nathaniel Qin, and Sumeet Bansal
 <img src="milestone_images/milestone5/home.html.png">
 <br />
 
+This page is almost the same as milestone 4. In this iteration, we replaced the words "translator" at the top left corner with the logo of our application "Translangtor". We also removed "Is this a good translation?" at the bottom of the right input box due to difficulties with the implementation. 
+
 ### Profile Page
 <br />
 <img src="milestone_images/milestone5/profile.html.png">
 <br />
+
+In this page, we removed the placeholder name and replaced it with the user's name when they login through Firebase. We also removed the edit profile portion because we realized there isn't any feature to edit in the profile. We also removed the "streak" feature because we found it to not be a necessary for the profile portion. We also added a translation history that will continue to accumulate words that the user has inputted to be translated. 
 
 ### Study Page
 <br />
 <img src="milestone_images/milestone5/study.html.png">
 <br />
 
+This is the same as milestone 4.
+
 ### Test Page
 <br />
 <img src="milestone_images/milestone5/test.html.png">
 <br />
+
+This is the same as milestone 4.
 
 ### Data Visualization
 Our Firestore data is visualized in our Study Flash Cards and Test Yourself functionalities, pictured below in that order:
