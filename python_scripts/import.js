@@ -26,4 +26,6 @@ const jsonToFirestore = async () => {
   }
 };
 
+
 jsonToFirestore();
+
