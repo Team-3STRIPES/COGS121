@@ -96,7 +96,7 @@ def query2(sentence):
 
 def query3(sentence):
 	translator = Translator()
-	sentence = translator.translate(sentence, dest="zh-tw").text
+	sentence = translator.translate(sentence, dest="ja").text
 	sentence = translator.translate(sentence).text
 	print(sentence)
 

@@ -42,7 +42,6 @@ $(document).ready(() => {
   function requests() {
     reqDefinition();
     reqSlang();
-    reqHist();
   }
 
   function updateDefinitions() {
@@ -75,6 +74,11 @@ $(document).ready(() => {
         clearInterval(loading);
         displayTranslation();
         updateDefinitions();
+
+        firebase.firestore().collection('users').doc(userID).collection('history').doc(userInput).set({
+          word: userInput,
+          definition: data.def
+        }); 
       },
       error: (jqXHR, textStatus, errorThrown) => {
         let word = jqXHR.responseJSON.word;
@@ -108,7 +112,6 @@ $(document).ready(() => {
           firebase.firestore().collection('definition').where("word", "==", words[i])
             .get().then(function (querySnapshot) {
               querySnapshot.forEach((doc) => {
-                console.log("pls work")
                 $definition.append(`<p class="definition"><span class="definition-term">${doc.data().word}</span> 
                   ${doc.data().def}</p>`);
             });    
@@ -119,13 +122,6 @@ $(document).ready(() => {
        
       }
     });
-  }
-
-  function reqHist() {
-    console.log(userID);
-    firebase.firestore().collection('users').doc(userID).collection('history').doc(userInput).set({
-      sentence: userInput
-    }); 
   }
 
   firebase.auth().onAuthStateChanged((user) => {
