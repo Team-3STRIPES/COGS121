@@ -1,0 +1,17 @@
+spacy
+sys
+in_place
+tweepy
+json
+configparser
+PIL
+pytesseract
+io
+os
+google.cloud
+google.cloud.speech
+random
+requests
+pickle
+bs4
+re
