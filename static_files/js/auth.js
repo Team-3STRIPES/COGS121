@@ -9,6 +9,10 @@ $(document).ready(() => {
       // The signed-in user info.
       var user = result.user;
 
+      firebase.firestore().collection('users').doc(user.uid).get().then((doc) => {
+        if(!doc.data()) createUserDoc(user.uid);
+      });
+
       $('#signedout').css('display', 'none');
       $('#signedin').css('display', 'flex');
     }).catch(function(error) {
@@ -27,4 +31,9 @@ $(document).ready(() => {
     });
   });
 
+  function createUserDoc(id) {
+    firebase.firestore().collection('users').doc(id).set({
+      wordCount: 0
+    })
+  }
 });

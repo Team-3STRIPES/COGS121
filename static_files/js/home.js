@@ -45,7 +45,7 @@ $(document).ready(() => {
   }
 
   function updateDefinitions() {
-    
+
   }
 
   function reqDefinition() {
@@ -78,7 +78,8 @@ $(document).ready(() => {
         firebase.firestore().collection('users').doc(userID).collection('history').doc(userInput).set({
           word: userInput,
           definition: data.def
-        }); 
+        }, {merge: true});
+
       },
       error: (jqXHR, textStatus, errorThrown) => {
         let word = jqXHR.responseJSON.word;
@@ -114,14 +115,21 @@ $(document).ready(() => {
               querySnapshot.forEach((doc) => {
                 console.log(doc.data().word)
                 console.log(doc.data().def)
-                $definition.append(`<p class="definition"><span class="definition-term">${doc.data().word} &mdash; </span> 
+                $definition.append(`<p class="definition"><span class="definition-term">${doc.data().word} &mdash; </span>
                   ${doc.data().def}</p>`);
-            });    
+            });
           });
         }
+        firebase.firestore().collection('users').doc(userID).get().then((doc) => {
+          let curWordCount = parseInt(doc.data().wordCount);
+          curWordCount+= words.length;
+          firebase.firestore().collection('users').doc(userID).set({
+            wordCount: curWordCount
+          });
+        })
       },
       error: (jqXHR, textStatus, errorThrown) => {
-       
+
       }
     });
   }

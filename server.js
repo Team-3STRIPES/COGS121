@@ -33,7 +33,7 @@ app.get('/test', function(req, res){
 app.get('/def', function(req, res) {
   console.log("def got pinged")
   let spawn = require("child_process").spawn;
-  let child = spawn('py',["python_scripts/word_to_def.py", req.query.def]);
+  let child = spawn('python',["python_scripts/word_to_def.py", req.query.def]);
 
   child.stdout.on('data', (data)=>{
     console.log('on data')
@@ -44,7 +44,7 @@ app.get('/def', function(req, res) {
 app.get('/slang', function(req,res) {
   console.log("slang got pinged")
   let spawn = require("child_process").spawn;
-  let child = spawn('py',["python_scripts/detect_slang.py", req.query.def]);
+  let child = spawn('python',["python_scripts/detect_slang.py", req.query.def]);
 
   child.stdout.on('data', (data)=>{
       console.log('detected slang')
