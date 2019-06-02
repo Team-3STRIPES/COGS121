@@ -1,7 +1,8 @@
 var http = require('http'),
     express = require('express'),
     path = require('path'),
-    bodyParser = require('body-parser');
+    bodyParser = require('body-parser')
+    Filter = require('bad-words');
 
 const PORT = 1500
 
@@ -37,6 +38,8 @@ app.get('/def', function(req, res) {
 
   child.stdout.on('data', (data)=>{
     console.log('on data')
+    let filter = new Filter();
+    data = filter.clean(data);
   	res.send({'def': data.toString('utf8')});
   });
 })
@@ -52,6 +55,12 @@ app.get('/slang', function(req,res) {
       res.send({'words': data.toString('utf8')});
   });
 })
+
+app.get('/censor', function(req, res){
+    let filter = new Filter();
+    let data = filter.clean(req.query.def);
+    res.send({'def': data.toString('utf8')});
+}) 
 
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`))

@@ -7,16 +7,19 @@ import re
 dict_url = 'https://www.dictionary.com/e/slang/'
 word = 'jesus take the wheel'
 
+ac_url = 'https://www.dictionary.com/e/acronyms/'
+ac = 'aafes'
 
 def write_content(examples):
 	for e in examples:
-		starts = [m.start() for m in re.finditer(word, e)]
+		e = e.lower()
+		starts = [m.start() for m in re.finditer(ac, e)]
 		if not starts:
 			continue
-		ends = [i+len(word)-1 for i in starts]
+		ends = [i+len(ac)-1 for i in starts]
 		
 		labels = ["Slang" for _ in starts]
-		points = [{"start":s, "end":e, "text":word} for s,e in zip(starts,ends)]
+		points = [{"start":s, "end":e, "text":ac} for s,e in zip(starts,ends)]
 		
 		annotation = []
 		for i in range(len(starts)):
@@ -29,7 +32,7 @@ def write_content(examples):
 			"content": e,
 			"annotation":annotation,
 		}
-		with open("../twitter_data/slang4.json", 'a') as outfile:
+		with open("../twitter_data/acronyms.json", 'a') as outfile:
 			json_data = json.dumps(d)
 			outfile.write(json_data)
 			outfile.write('\n')
@@ -60,6 +63,56 @@ def webscrape():
 			word = new_url.split('/')[-1].replace('-', ' ')
 		except:
 			continue
+
+def webscrape2():
+	global ac
+	data = {
+		'definition': [],
+	}
+	new_url = ac_url + ac
+	while (True):
+		print(ac)
+		try:
+			html = requests.get(new_url).text
+			parsed_html = BeautifulSoup(html, 'html.parser')
+			examples = parsed_html.findAll('div', class_="examples__item__content text")
+			
+			examples = list(filter(None, [BeautifulSoup(str(e), 'html.parser').text.strip() for e in examples]))
+			examples = [e.replace("“", "\"").replace("’", "\'").replace("”", "\"").replace('…', "") for e in examples]
+			write_content(examples)
+
+			definition = parsed_html.findAll('div', class_="article-word__header__content__holder")
+			
+			links = parsed_html.findAll('a', class_="next")
+			if len(links) == 0:
+				break
+			link = str(links[0])
+			s = link.find('href="') + 6
+			link = link[s:]
+			e = link.find('">')
+			link = link[:e]
+			new_url = link
+
+			if len(definition) < 1:
+				break
+			result = re.search('<p>(.*)</p>', str(definition[0]))
+			final_def = result.group(1)
+			final_def = re.sub("<[^>]*>", "", final_def);
+			d = {
+				'word': ac,
+				'def': final_def,
+			}
+			data['definition'].append(d)
+
+			ac = new_url.split('/')[-1].replace('-', ' ')
+
+		except:
+			#continue
+			pass
+
+	with open("../twitter_data/definitions3.json", 'a') as outfile:
+			json_data = json.dumps(data)
+			outfile.write(json_data)
 
 #webscrape()
 def get_defs():
@@ -104,11 +157,11 @@ def get_defs():
 			
 		except:
 			continue
-	with open("../twitter_data/definitions2.json", 'a') as outfile:
+	with open("../twitter_data/definitions3.json", 'a') as outfile:
 			json_data = json.dumps(data)
 			outfile.write(json_data)
 
-get_defs()
+webscrape2()
 
 
 #next url = class next 

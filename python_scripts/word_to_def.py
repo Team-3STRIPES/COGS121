@@ -10,6 +10,7 @@ from googletrans import Translator
 ud_url = 'http://api.urbandictionary.com/v0/define?term='
 rl_url = 'https://api.datamuse.com/words?ml='
 dict_url = 'https://www.dictionary.com/e/slang/'
+ac = 'aafes'
 
 def predict(text):
     nlp = spacy.load("./python_scripts/model")

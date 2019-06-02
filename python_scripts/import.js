@@ -1,3 +1,12 @@
+var Filter = require('bad-words');
+var definitions = require('../twitter_data/definitions.json')
+var fs = require('fs');
+
+
+
+let filter = new Filter();
+
+
 const firebaseConfig = {
       apiKey: "AIzaSyBjQZdC4RzK-EOz-f8-w34MEV68lRYPASs",
       authDomain: "cogs121-c88c5.firebaseapp.com",
@@ -18,7 +27,7 @@ const jsonToFirestore = async () => {
     await firestoreService.initializeApp(serviceAccount, firebaseConfig.databaseURL);
     console.log('Firebase Initialized');
 
-    await firestoreService.restore('../twitter_data/definitions.json');
+    await firestoreService.restore('../twitter_data/definitions5.json');
     console.log('Upload Success');
   }
   catch (error) {
@@ -27,5 +36,19 @@ const jsonToFirestore = async () => {
 };
 
 
-jsonToFirestore();
+let censor = () => {
+  let filter = new Filter();
+  for (let i = 0; i < definitions['definition'].length; i++) {
+    definitions['definition'][i]['def'] = filter.clean(definitions['definition'][i]['def'])
+  }
+  var jsonData = JSON.stringify(definitions);
+  fs.writeFile("../twitter_data/definitions5.json", jsonData, function(err) {
+    if (err) {
+        console.log(err);
+    }
+  });
+}
 
+//console.log(filter.clean("what the fuck"));
+//censor();
+jsonToFirestore();

@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Team-3STRIPES/COGS121#readme",
   "dependencies": {
+    "bad-words": "^3.0.2",
     "body-parser": "^1.19.0",
     "child-process": "^1.0.2",
     "express": "^4.16.4",
