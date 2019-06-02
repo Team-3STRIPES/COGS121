@@ -44,10 +44,6 @@ $(document).ready(() => {
     reqSlang();
   }
 
-  function updateDefinitions() {
-
-  }
-
   function reqDefinition() {
     let loadingMsg = 'Translating..';
     const maxTimes = 5;
@@ -73,7 +69,6 @@ $(document).ready(() => {
         finalMessage = data.def;
         clearInterval(loading);
         displayTranslation();
-        updateDefinitions();
 
         firebase.firestore().collection('users').doc(userID).collection('history').doc(userInput).set({
           word: userInput,
@@ -90,6 +85,57 @@ $(document).ready(() => {
     });
   }
 
+  function updateDefinition(word) {
+    $.ajax({
+      url: "/new_word",
+      type: "GET",
+      data: {
+              def: word,
+            },
+      success: (data, textStatus, jqXHR) => {
+        console.log(data.def)
+        let $definition = $('.definition-section');
+        if (data.def != "") {
+          $definition.append(`<p class="definition"><span class="definition-term">${word} &mdash; </span>
+            ${data.def}</p>`);
+          firebase.firestore().collection('users').doc(userID).collection('words').doc(word).set({
+            def: data.def
+          });
+        }
+        else {
+          firebase.firestore().collection('users').doc(userID).collection('words').doc(word).delete();
+        }
+        
+      },
+      error: (jqXHR, textStatus, errorThrown) => {
+        return "";
+      }
+    });
+  }
+
+  function addDefinition(words) {
+    let $definition = $('.definition-section');
+    $definition.html(`<h2 class="subtitle">Definitions</h2>`);
+    for (let i = 0; i < words.length; i++) {
+      firebase.firestore().collection('definition').where("word", "==", words[i])
+        .get().then(function (querySnapshot) {
+        querySnapshot.forEach((doc) => {
+          console.log(doc.data().word)
+          console.log(doc.data().def)
+          firebase.firestore().collection('users').doc(userID).collection('words').doc(doc.data().word).set({
+            def: doc.data().def
+          })
+          if (words.includes(doc.data().word)) {
+            words[words.indexOf(doc.data().word)] = "";
+          } 
+          $definition.append(`<p class="definition"><span class="definition-term">${doc.data().word} &mdash; </span>
+            ${doc.data().def}</p>`);
+        });
+      });
+    }
+    return words;
+  }
+
   function reqSlang() {
     $.ajax({
       url: "/slang",
@@ -102,24 +148,23 @@ $(document).ready(() => {
         let words = data.words.trim().split("+");
         if (words.length > 0 && words[0] !== "") {
           for (let i = 0; i < words.length; i++) {
+            if (words[i] == "") {
+              break;
+            }
             firebase.firestore().collection('users').doc(userID).collection('words').doc(words[i]).set({
               word: words[i]
             })
           }
         }
-        let $definition = $('.definition-section');
-        $definition.html(`<h2 class="subtitle">Definitions</h2>`);
-        for (let i = 0; i < words.length; i++) {
-          firebase.firestore().collection('definition').where("word", "==", words[i])
-            .get().then(function (querySnapshot) {
-              querySnapshot.forEach((doc) => {
-                console.log(doc.data().word)
-                console.log(doc.data().def)
-                $definition.append(`<p class="definition"><span class="definition-term">${doc.data().word} &mdash; </span>
-                  ${doc.data().def}</p>`);
-            });
-          });
-        }
+
+        $.when(addDefinition(words)).then((e) => {
+          for (let i = 0; i < e.length; i++) {
+            if (e[i] != "") {
+              updateDefinition(e[i]);
+            }
+          }
+        })
+
         firebase.firestore().collection('users').doc(userID).get().then((doc) => {
           let curWordCount = parseInt(doc.data().wordCount);
           curWordCount+= words.length;
@@ -144,4 +189,40 @@ $(document).ready(() => {
       $('#signedout').css('display', 'flex');
     }
   });
+
+  $('#left-sound').click(() => {
+     $.ajax({
+      url: "/tts",
+      type: "GET",
+      data: {
+              def: userInput,
+            },
+      success: (data, textStatus, jqXHR) => {
+        console.log("SUCCESS")
+        new Audio(data.msg).play()
+      },
+      error: (jqXHR, textStatus, errorThrown) => {
+
+      }
+    });
+  });
+
+  $('#right-sound').click(() => {
+    console.log($outputBox.val())
+     $.ajax({
+      url: "/tts",
+      type: "GET",
+      data: {
+              def: userInput,
+            },
+      success: (data, textStatus, jqXHR) => {
+        console.log("RIGHT SUCCESS")
+        new Audio($outputBox.val()+".mp3").play()
+      },
+      error: (jqXHR, textStatus, errorThrown) => {
+
+      }
+    });
+  });
 });
+
