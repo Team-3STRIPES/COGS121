@@ -36,7 +36,7 @@ app.get('/test', function(req, res){
 app.get('/def', function(req, res) {
   console.log("def got pinged")
   let spawn = require("child_process").spawn;
-  let child = spawn('py',["python_scripts/word_to_def.py", req.query.def]);
+  let child = spawn('python',["python_scripts/word_to_def.py", req.query.def]);
 
   child.stdout.on('data', (data)=>{
     console.log('on data')
@@ -49,7 +49,7 @@ app.get('/def', function(req, res) {
 app.get('/slang', function(req,res) {
   console.log("slang got pinged")
   let spawn = require("child_process").spawn;
-  let child = spawn('py',["python_scripts/detect_slang.py", req.query.def]);
+  let child = spawn('python',["python_scripts/detect_slang.py", req.query.def]);
 
   child.stdout.on('data', (data)=>{
       console.log('detected slang')
@@ -68,13 +68,13 @@ app.get('/new_word', function(req, res){
       res.send({'def': data.toString('utf8')});
     }
   })
-}) 
+})
 
 app.get('/tts', function(req, res) {
-  console.log("tts got pinged") 
+  console.log("tts got pinged")
   console.log(req.query.def)
   let spawn = require("child_process").spawn;
-  let child = spawn('py',["python_scripts/tts.py", req.query.def]);
+  let child = spawn('python',["python_scripts/tts.py", req.query.def]);
 
   child.stdout.on('data', (data)=>{
     console.log(data.toString('utf8'))

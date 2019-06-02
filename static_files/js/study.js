@@ -8,30 +8,19 @@ $(document).ready(() => {
     if (user) {
 
       // get words of this current user
-      let wordPromise = firebase.firestore().collection('users').doc(user.uid).collection('words').get().then((querySnapshot) => {
+      firebase.firestore().collection('users').doc(user.uid).collection('words').get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
 
-          // search for definitions of each word
+          // get for definitions of each word
           let theWord = doc.data().word;
-          firebase.firestore().collection('definition').where('word', '==', theWord).get().then((querySnapshot) => {
-            let temp = 0;
-            querySnapshot.forEach((doc) => {
-              flashCards.push({
-                word: doc.data().word,
-                definition: doc.data().def
-              });
-              temp++;
-            });
-            if(temp === 0) {
-              flashCards.push({
-                word: theWord,
-                definition: 'A definition was not found for this word.'
-              });
-            }
-            setFlashCard();
-            setNumbers();
+          let theDef = doc.data().def;
+          flashCards.push({
+            word: theWord,
+            definition: theDef
           });
         });
+        setFlashCard();
+        setNumbers();
       });
     } else {
       window.location.href = 'home.html';

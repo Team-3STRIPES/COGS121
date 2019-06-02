@@ -105,7 +105,7 @@ $(document).ready(() => {
         else {
           firebase.firestore().collection('users').doc(userID).collection('words').doc(word).delete();
         }
-        
+
       },
       error: (jqXHR, textStatus, errorThrown) => {
         return "";
@@ -123,11 +123,12 @@ $(document).ready(() => {
           console.log(doc.data().word)
           console.log(doc.data().def)
           firebase.firestore().collection('users').doc(userID).collection('words').doc(doc.data().word).set({
+            word: doc.data().word,
             def: doc.data().def
           })
           if (words.includes(doc.data().word)) {
             words[words.indexOf(doc.data().word)] = "";
-          } 
+          }
           $definition.append(`<p class="definition"><span class="definition-term">${doc.data().word} &mdash; </span>
             ${doc.data().def}</p>`);
         });
@@ -213,11 +214,11 @@ $(document).ready(() => {
       url: "/tts",
       type: "GET",
       data: {
-              def: userInput,
+              def: finalMessage,
             },
       success: (data, textStatus, jqXHR) => {
         console.log("RIGHT SUCCESS")
-        new Audio($outputBox.val()+".mp3").play()
+        new Audio(data.msg).play()
       },
       error: (jqXHR, textStatus, errorThrown) => {
 
@@ -225,4 +226,3 @@ $(document).ready(() => {
     });
   });
 });
-
