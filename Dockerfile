@@ -1,6 +1,7 @@
 FROM nikolaik/python-nodejs:latest
-EXPOSE 80
+EXPOSE 1500
 
-RUN pip install -r requirements.txt
+COPY . .
+RUN pip install -r requirements.txt && npm install
 
 CMD ["npm", "start"]
