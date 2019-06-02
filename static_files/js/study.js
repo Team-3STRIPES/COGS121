@@ -2,37 +2,49 @@ $(document).ready(() => {
 
 	let currentIndex = 0;
 
-	let dummyCards = [];
-	const FIREBASE_URL = 'https://firestore.googleapis.com/v1/projects/cogs121-c88c5/databases/(default)/documents/flashcards';
-	$.get(FIREBASE_URL, function(data) {
-		// cleans up the JSON (original data can be viewed at FIREBASE_URL)
-		const cards = data.documents.map((val) => [
-			val.fields.term.stringValue,
-			val.fields.definition.stringValue,
-			val.fields.example.stringValue
-		]);
-		// for each card
-		for (cIndex in cards) {
-			const citem = cards[cIndex];
-			dummyCards.push({
-				word: citem[0],
-				definition: citem[1],
-				example: citem[2]
-			});
-		}
-		// must be in the callback because it depends on dummyCards, which is populated above
-		setFlashCard();
-		setNumbers();
-	});
+	let flashCards = [];
+
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+
+      // get words of this current user
+      let wordPromise = firebase.firestore().collection('users').doc(user.uid).collection('words').get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+
+          // search for definitions of each word
+          let theWord = doc.data().word;
+          firebase.firestore().collection('definition').where('word', '==', theWord).get().then((querySnapshot) => {
+            let temp = 0;
+            querySnapshot.forEach((doc) => {
+              flashCards.push({
+                word: doc.data().word,
+                definition: doc.data().def
+              });
+              temp++;
+            });
+            if(temp === 0) {
+              flashCards.push({
+                word: theWord,
+                definition: 'A definition was not found for this word.'
+              });
+            }
+            setFlashCard();
+            setNumbers();
+          });
+        });
+      });
+    } else {
+      window.location.href = 'home.html';
+    }
+  });
 
 	function setFlashCard() {
-		$('.flash-card-word').first().text(dummyCards[currentIndex].word);
-		$('.flash-card-def').first().text(dummyCards[currentIndex].definition);
-		$('.flash-card-ex').first().text(dummyCards[currentIndex].example);
+		$('.flash-card-word').first().text(flashCards[currentIndex].word);
+		$('.flash-card-def').first().text(flashCards[currentIndex].definition);
 	}
 
 	function setNumbers() {
-		 $("#flash-card-total").text(dummyCards.length);
+		 $("#flash-card-total").text(flashCards.length);
 		 $("#flash-card-index").text(1);
 	}
 
@@ -47,7 +59,7 @@ $(document).ready(() => {
 	}
 
 	$('.left-arrow').on('click', () => {
-		currentIndex = (currentIndex + dummyCards.length - 1) % dummyCards.length;
+		currentIndex = (currentIndex + flashCards.length - 1) % flashCards.length;
 		$('.flash-card').first().animate({
 			opacity: 0,
 			left: '-=100'
@@ -66,7 +78,7 @@ $(document).ready(() => {
 	}
 
 	$('.right-arrow').on('click', () => {
-		currentIndex = (currentIndex + dummyCards.length - 2) % dummyCards.length;
+		currentIndex = (currentIndex + flashCards.length - 2) % flashCards.length;
 		$('.flash-card').first().animate({
 			opacity: 0,
 			left: '+=100'
