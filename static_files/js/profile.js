@@ -36,6 +36,12 @@ $(document).ready(() => {
       let userRef = firebase.firestore().collection('users').doc(user.uid);
       userRef.get().then((doc) => {
         let wordCount = doc.data().wordCount;
+        if(!wordCount) {
+          firebase.database().ref('/users/' + user.uid).set({
+            wordCount: 0
+          });
+          wordCount = 0;
+        }
         let level;
 
         // determine user's level

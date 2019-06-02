@@ -1,0 +1,11 @@
+Cython
+spacy
+in_place
+tweepy
+configparser
+Pillow
+pytesseract
+google.cloud
+google.cloud.speech
+requests
+bs4
