@@ -43,7 +43,7 @@
 <li><b>static_files/js/auth.jsprofile.js</b> &mdash; This file contains all of the scripts necessary for the profile page. Some functionalities include various button click handlers. This also pings the database to retrieve information about the user, such as their word count, their level, and their translation history.</li>
 <li><b>static_files/js/auth.jsstudy.js</b> &mdash; This file contains all of the scripts necessary for the flash cards studying page. The database is first pinged for all of the words that the user has seen before. Then, the flash cards are populated into an object (flashCards). There are also button click event handlers for navigating between the cards.</li>
 <li><b>static_files/js/auth.jstest.js</b> &mdash; This file contains all of the scripts necessary for the testing page. There are various, simple button event handlers. Most of the functionalities in here are for retrieving questions from the database, and for making sure the quiz is randomized each time.</li>
-<li><b>js_scripts/import.js</b>< &mdash; Javascript script to easily import a json file into Google Firestore and to censor any profanity found in any of the definitions.</li>
+<li><b>js_scripts/import.js</b> &mdash; Javascript script to easily import a json file into Google Firestore and to censor any profanity found in any of the definitions.</li>
 </ul>
 
 ## Google Slide Presentation

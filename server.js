@@ -1,8 +1,8 @@
 /**
  * Javascript backend code that acts as the server for our
- * web application. We serve both our html pages and audio 
- * files and we also call the other python scripts from 
- * from this backend script. 
+ * web application. We serve both our html pages and audio
+ * files and we also call the other python scripts from
+ * from this backend script.
  */
 
 //imports used
@@ -76,7 +76,7 @@ app.get('/slang', function(req,res) {
   });
 })
 
-//get request to censor new words 
+//get request to censor new words
 app.get('/new_word', function(req, res){
   ud.term(req.query.def, (error, entries, tags, sounds) => {
     if (error) {
@@ -103,5 +103,5 @@ app.get('/tts', function(req, res) {
 })
 
 
-//serve application on port 
+//serve application on port
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
