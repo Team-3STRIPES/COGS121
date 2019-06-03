@@ -4,7 +4,7 @@ There are multiple query functions defined in this file.
 Each query was an interation of our idea on what would be the
 best way to translate a given set of text. We ended up just
 going for more of a simple, hacky solution that translated
-a given set of text from English to Japanese, and back.
+a given reverse look up definition from English to German, and back. 
 '''
 
 from nltk.corpus import words
@@ -155,6 +155,8 @@ def query4(sentence):
     '''
     Method: translate sentence and replace slang with nonslang words
         checks if word exists in dictionary.com/e/slang first
+        otherwise checks if a word is in urbandictionary
+        translates reverse lookup dictionary definition
     Input: sentence to be translated - string
     Return: translated sentence - string
     '''
@@ -178,11 +180,17 @@ def query4(sentence):
                         if d[0] != '\t':
                             definition = d
                             break
+
+                #check length of definition and only grab first 20 words
                 if len(definition.split()) > 20:
                     definition = " ".join(str(x) for x in definition.split()[:20])
+
+                #reverse look up definition
                 new_word = reverse_definition(definition)
                 if not new_word:
                     new_word = word
+
+                #translate word and set new word in sent_list
                 new_word = translator.translate(new_word , dest="de").text
                 new_word = translator.translate(new_word ).text
                 sent_list[i] = new_word
@@ -198,10 +206,12 @@ def query4(sentence):
             definition = data['list'][0]['definition']
             example = data['list'][0]['example']
 
-            #reverse search on the definition
+            #check length of definition and only grab first 20 words
             definition = definition.replace("[","").replace("]","").split("\n")[0].replace(" ", "+")
             if len(definition.split()) > 20:
                 definition = " ".join(str(x) for x in definition.split()[:20])
+
+            #reverse search on the definition
             new_word = reverse_definition(definition)
             if not new_word:
                 new_word = word
