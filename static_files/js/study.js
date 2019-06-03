@@ -87,5 +87,9 @@ $(document).ready(() => {
 		$('#flash-card-index').text(currentIndex + 1)
 	})
 
+  // button handler for the finish button
+  $('#finishbtn').on('click', () => {
+    window.location.href = 'profile.html';
+  })
 
 });

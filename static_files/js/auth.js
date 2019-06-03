@@ -13,9 +13,10 @@ $(document).ready(() => {
     // sign in with Google
     var provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider).then(function(result) {
-
+      let user = result.user;
       // check if this is the first time has logged in, i.e. account creation
       firebase.firestore().collection('users').doc(user.uid).get().then((doc) => {
+        console.log(doc);
         if(!doc.data()) createUserDoc(user.uid);
       });
 
