@@ -145,6 +145,8 @@ $(document).ready(() => {
             def: doc.data().def
           })
           if (words.includes(doc.data().word)) {
+            console.log('setting to ""')
+
             words[words.indexOf(doc.data().word)] = "";
           }
 
@@ -153,6 +155,7 @@ $(document).ready(() => {
         });
       });
     }
+    console.log(words)
     return words;
   }
 
