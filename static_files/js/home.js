@@ -11,6 +11,7 @@ $(document).ready(() => {
   let userInput;
   let finalMessage;
   let countDownTimer;
+  let definitionsLoading;
   const $inputBox = $('#left-text');
   const $outputBox = $('#right-text');
 
@@ -30,6 +31,8 @@ $(document).ready(() => {
 
   // displays the translation, assuming that the back end has already been pinged
   function displayTranslation() {
+    clearInterval(definitionsLoading);
+    $('.definitions').empty();
     if(finalMessage !== "\n") {
       $outputBox.css('color', '#111');
     } else {
@@ -41,6 +44,23 @@ $(document).ready(() => {
 
   // bundle of functions that calls backend routes for detecting slang and getting definitions for them
   function requests() {
+    $('.definitions').empty();
+
+    // this handles the animation while waiting for a response from the backend
+    let loadingMsg = 'Getting definitions..';
+    const maxTimes = 5;
+    let curTimes = 0;
+    definitionsLoading = setInterval(() => {
+      $('.definitions').text(`${loadingMsg}.`);
+      if(curTimes === maxTimes) {
+        loadingMsg = 'Getting definitions..';
+        curTimes = 0;
+      } else {
+        loadingMsg += ".";
+        curTimes++;
+      }
+    }, 150);
+
     reqDefinition();
     reqSlang();
   }
@@ -79,7 +99,8 @@ $(document).ready(() => {
         // update the user's translation history
         firebase.firestore().collection('users').doc(userID).collection('history').doc(userInput).set({
           word: userInput,
-          definition: data.def
+          definition: data.def,
+          time: new Date().getTime()
         }, {merge: true});
 
       },
@@ -105,7 +126,7 @@ $(document).ready(() => {
       success: (data, textStatus, jqXHR) => {
 
         // update front-end to display definitions
-        let $definition = $('.definition-section');
+        let $definition = $('.definitions');
         if (data.def != "") {
           $definition.append(`<p class="definition"><span class="definition-term">${word} &mdash; </span>${data.def}</p>`);
 
@@ -131,7 +152,7 @@ $(document).ready(() => {
   // retrieves definitions of slang words to display underneath translation, and updates user's collection of words
   function addDefinition(words) {
 
-    let $definition = $('.definition-section');
+    let $definition = $('.definitions');
     for (let i = 0; i < words.length; i++) {
 
       // ping database for definitions
