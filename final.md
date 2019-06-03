@@ -1,7 +1,7 @@
 # Team Name: 3STRIPES
 
 ## Team Members
-* <b>Edward Chen</b>: Headed all of the slang translation algorithm (all of the python scripts) and set up database.<br>
+* <b>Edward Chen</b>: Headed all of the slang translation algorithm (all of the python scripts), created backend routes, and set up database.<br>
 * <b>Eunice Chan</b>: Helped design user interface, helped code pages in HTML, CSS, JS, and took charge of branding and logo design.<br>
 * <b>Nathaniel Qin</b>: Headed the linking of front-end pages to Firebase and Firestore, helped code pages in HTML, CSS, and JS, and helped design user interface.<br>
 * <b>Sumeet Bansal</b>: Helped refactor code and set up database.<br>
