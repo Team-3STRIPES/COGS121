@@ -1,13 +1,19 @@
+/* This file contains all of the scripts necessary for the testing page. There
+ * are various, simple button event handlers. Most of the functionalities in
+ * here are for retrieving questions from the database, and for making sure the
+ * quiz is randomized each time.
+ */
+
 $(document).ready(() => {
 
 	let currentIndex = 0;
 	let answerValue;
+  let numCorrect = 0;
   let words = [];
   let dummyAnswers = [];
-  let testQuestions = [];
+  const testQuestions = [];
 
-  let numCorrect = 0;
-
+  // make sure user is logged in; must be authenticated to view this page
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
 
@@ -27,14 +33,18 @@ $(document).ready(() => {
 
         // choose 10 words for the question
         if(numWords < 10) {
+
+          // user should not be able to take quiz if they have less than 10 words
           window.location.href = 'profile.html';
         }
 
+        // randomize the word order
         words = shuffle(words);
 
+        // choose 3 random answers for the other options
         for(let i = 0; i < 10; i++) {
           let randomAnswers = [words[i].definition];
-          let checked = [];
+          let checked = []; // easy way to check for duplicate answers
           for(let j = 0; j < dummyAnswers.length; j++) {
             checked.push(false);
             if(dummyAnswers[j] == words[i].definition) checked[j] = true;
@@ -48,8 +58,10 @@ $(document).ready(() => {
             }
           }
 
+          // randomize the answer order
           randomAnswers = shuffle(randomAnswers);
 
+          // figure out which answer is the correct one
           let correct;
           for(let j = 0; j < randomAnswers.length; j++) {
             if(randomAnswers[j] == words[i].definition) {
@@ -58,6 +70,7 @@ $(document).ready(() => {
             }
           }
 
+          // populate list of test questions
           testQuestions.push({
             question: `What does "${words[i].word}" mean?`,
             a1: randomAnswers[0],
@@ -67,10 +80,15 @@ $(document).ready(() => {
             correct: 'a' + correct
           });
         }
-        console.log(testQuestions);
+
+        // set the first question
       	setQuestions();
+      	setButton();
+      	setCircle();
       });
     } else {
+
+      // kick user back to home page if not logged in
       window.location.href = 'home.html';
     }
   });
@@ -85,11 +103,9 @@ $(document).ready(() => {
         arr[j] = x;
     }
     return arr;
-}
+  }
 
-	setButton();
-	setCircle();
-
+  // set the question to the current index
 	function setQuestions() {
 	    $('#question').text(testQuestions[currentIndex].question);
       $('#question-number').text(currentIndex + 1 + ". ");
@@ -99,6 +115,7 @@ $(document).ready(() => {
 	    $('#a4').text(testQuestions[currentIndex].a4);
   	}
 
+  // set the button text
 	function setButton() {
 		if (currentIndex === 9) {
 			$('.submitbtn').text("SUBMIT");
@@ -108,31 +125,32 @@ $(document).ready(() => {
 		}
 	}
 
+  // advance progress on the progress bar
 	function setCircle() {
-		for (i = 0; i <= currentIndex; i++) {
-			$('.progress-circle').eq(i).css("background-color", "#EEE");
-		}
+		$('.progress-circle').eq(currentIndex).css("background-color", "#F7D345");
+    if(currentIndex > 0) $('.progress-circle').eq(currentIndex - 1).css("background-color", "#EEE");
 	}
 
 	// marks selected as yellow, not selected as gray
-
 	$('.answer-option').on('click', function() {
 		$('.answer-option').css("background-color", "#EEE");
 		$(this).css("background-color", "#f7d345");
 		answerValue = $(this).attr('id');
 	})
 
-	//updates button text and questions every time the button is pressed
-
+	// updates button text and questions every time the button is pressed
 	function updateQuestion() {
-		//e.preventDefault();
 		if (currentIndex === 9) {
-  			alert("You have reached the end of the test. You scored: " + numCorrect + "/10.");
-        setTimeout(() => {
-          window.location.href = 'profile.html';
-        }, 0);
-  		}
+
+      // the test is completed
+			alert("You have reached the end of the test. You scored: " + numCorrect + "/10.");
+      setTimeout(() => {
+        window.location.href = 'profile.html';
+      }, 0);
+		}
 		else {
+
+      // advance the question
 			currentIndex++;
       answerValue = null;
 			$('.answer-option').css("background-color", "#EEE");
@@ -142,6 +160,7 @@ $(document).ready(() => {
 		}
 	}
 
+  // checks if user chose the correct answer and advances to next question
 	function submitAction() {
 		if (answerValue === testQuestions[currentIndex].correct) {
 			$('#'+answerValue).css("background-color","#7aea6b");
@@ -155,6 +174,7 @@ $(document).ready(() => {
 		setTimeout(updateQuestion,1500);
 	}
 
+  // handle submit button click
 	$('.submitbtn').on('click', (e) => {
     if(!answerValue) {
       alert("You must select an answer.");

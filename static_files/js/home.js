@@ -1,4 +1,12 @@
+/*
+ * This file contains all of the scripts that are necessary for the home page.
+ * Various things such as button click event handlers are contained within here,
+ * as well as more complex things like calling the back end scripts for
+ * translations and updating information the database.
+ */
+
 $(document).ready(() => {
+
   let userID;
   let userInput;
   let finalMessage;
@@ -6,6 +14,7 @@ $(document).ready(() => {
   const $inputBox = $('#left-text');
   const $outputBox = $('#right-text');
 
+  // next set of 3 functions handles user input into the translation text box
   $('#left-text').on('input', () => {
     userInput = $inputBox.val();
   });
@@ -19,16 +28,7 @@ $(document).ready(() => {
     countDownTimer = setTimeout(requests, 500);
   });
 
-  $('.f-to-s').on('click', () => {
-    $('.s-to-f').removeClass('active');
-    $('.f-to-s').addClass('active');
-  });
-
-  $('.s-to-f').on('click', () => {
-    $('.f-to-s').removeClass('active');
-    $('.s-to-f').addClass('active');
-  });
-
+  // displays the translation, assuming that the back end has already been pinged
   function displayTranslation() {
     if(finalMessage !== "\n") {
       $outputBox.css('color', '#111');
@@ -39,12 +39,16 @@ $(document).ready(() => {
     $outputBox.val(finalMessage);
   }
 
+  // bundle of functions that calls backend routes for detecting slang and getting definitions for them
   function requests() {
     reqDefinition();
     reqSlang();
   }
 
+  // calls backend route to retrieve the translation of the phrase that the user typed in
   function reqDefinition() {
+
+    // this handles the animation while waiting for a response from the backend
     let loadingMsg = 'Translating..';
     const maxTimes = 5;
     let curTimes = 0;
@@ -59,17 +63,20 @@ $(document).ready(() => {
         curTimes++;
       }
     }, 150);
+
+    // ajax call to backend route to translate the user's input
     $.ajax({
       url: "/def",
       type: "GET",
       data: {
-              def: userInput,
+              def: userInput
             },
       success: (data, textStatus, jqXHR) => {
         finalMessage = data.def;
         clearInterval(loading);
         displayTranslation();
 
+        // update the user's translation history
         firebase.firestore().collection('users').doc(userID).collection('history').doc(userInput).set({
           word: userInput,
           definition: data.def
@@ -77,6 +84,8 @@ $(document).ready(() => {
 
       },
       error: (jqXHR, textStatus, errorThrown) => {
+
+        // error
         let word = jqXHR.responseJSON.word;
         finalMessage = word;
         clearInterval(loading);
@@ -85,19 +94,22 @@ $(document).ready(() => {
     });
   }
 
+  // this function retrieves definitions of detected slang and displays them on the front end (pings Urban Dictionary if the word is not found already in the database)
   function updateDefinition(word) {
     $.ajax({
       url: "/new_word",
       type: "GET",
       data: {
-              def: word,
+              def: word
             },
       success: (data, textStatus, jqXHR) => {
-        console.log(data.def)
+
+        // update front-end to display definitions
         let $definition = $('.definition-section');
         if (data.def != "") {
-          $definition.append(`<p class="definition"><span class="definition-term">${word} &mdash; </span>
-            ${data.def}</p>`);
+          $definition.append(`<p class="definition"><span class="definition-term">${word} &mdash; </span>${data.def}</p>`);
+
+          // update collection of words this user has seen
           firebase.firestore().collection('users').doc(userID).collection('words').doc(word).set({
             word: word,
             def: data.def
@@ -109,20 +121,25 @@ $(document).ready(() => {
 
       },
       error: (jqXHR, textStatus, errorThrown) => {
+
+        // error
         return "";
       }
     });
   }
 
+  // retrieves definitions of slang words to display underneath translation, and updates user's collection of words
   function addDefinition(words) {
+
     let $definition = $('.definition-section');
-    $definition.html(`<h2 class="subtitle">Definitions</h2>`);
     for (let i = 0; i < words.length; i++) {
+
+      // ping database for definitions
       firebase.firestore().collection('definition').where("word", "==", words[i])
         .get().then(function (querySnapshot) {
         querySnapshot.forEach((doc) => {
-          console.log(doc.data().word)
-          console.log(doc.data().def)
+
+          // add word to user's collection of words
           firebase.firestore().collection('users').doc(userID).collection('words').doc(doc.data().word).set({
             word: doc.data().word,
             def: doc.data().def
@@ -130,15 +147,19 @@ $(document).ready(() => {
           if (words.includes(doc.data().word)) {
             words[words.indexOf(doc.data().word)] = "";
           }
-          $definition.append(`<p class="definition"><span class="definition-term">${doc.data().word} &mdash; </span>
-            ${doc.data().def}</p>`);
+
+          // update front end to display definitions
+          $definition.append(`<p class="definition"><span class="definition-term">${doc.data().word} &mdash; </span>${doc.data().def}</p>`);
         });
       });
     }
     return words;
   }
 
+  // retrieves the slang words that were detected
   function reqSlang() {
+
+    // call to back end route
     $.ajax({
       url: "/slang",
       type: "GET",
@@ -146,6 +167,7 @@ $(document).ready(() => {
               def: userInput,
             },
       success: (data, textStatus, jqXHR) => {
+
         //data.words is the words separated by '+'
         let words = data.words.trim().split("+");
         if (words.length > 0 && words[0] !== "") {
@@ -153,12 +175,15 @@ $(document).ready(() => {
             if (words[i] == "") {
               break;
             }
+
+            // add the word to the user's collection
             firebase.firestore().collection('users').doc(userID).collection('words').doc(words[i]).set({
               word: words[i]
             })
           }
         }
 
+        // update definition in collection of definitions if does not exist
         $.when(addDefinition(words)).then((e) => {
           for (let i = 0; i < e.length; i++) {
             if (e[i] != "") {
@@ -167,6 +192,7 @@ $(document).ready(() => {
           }
         })
 
+        // update the running total word count for this user
         firebase.firestore().collection('users').doc(userID).get().then((doc) => {
           let curWordCount = parseInt(doc.data().wordCount);
           curWordCount+= words.length;
@@ -177,10 +203,12 @@ $(document).ready(() => {
       },
       error: (jqXHR, textStatus, errorThrown) => {
 
+        // error
       }
     });
   }
 
+  // detect if user is signed in; must be authenticated to view this page
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       userID = user.uid;
@@ -192,6 +220,7 @@ $(document).ready(() => {
     }
   });
 
+  // text-to-speech for the user's input
   $('#left-sound').click(() => {
      $.ajax({
       url: "/tts",
@@ -200,17 +229,17 @@ $(document).ready(() => {
               def: userInput,
             },
       success: (data, textStatus, jqXHR) => {
-        console.log("SUCCESS")
         new Audio(data.msg).play()
       },
       error: (jqXHR, textStatus, errorThrown) => {
 
+        // error
       }
     });
   });
 
+  // text-to-speech for the translation
   $('#right-sound').click(() => {
-    console.log($outputBox.val())
      $.ajax({
       url: "/tts",
       type: "GET",
@@ -218,11 +247,11 @@ $(document).ready(() => {
               def: finalMessage,
             },
       success: (data, textStatus, jqXHR) => {
-        console.log("RIGHT SUCCESS")
         new Audio(data.msg).play()
       },
       error: (jqXHR, textStatus, errorThrown) => {
 
+        // error
       }
     });
   });
