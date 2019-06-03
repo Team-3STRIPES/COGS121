@@ -41,10 +41,13 @@ def reverse_definition(definition):
     new_url = rl_url+definition
     data = requests.get(new_url).json()
     new_word = ""
-    for syn in data[:1]:
-        new_word += syn['word']
-    #new_word = new_word[:-1]
-    return new_word
+    try:
+        for syn in data[:1]:
+            new_word += syn['word']
+        #new_word = new_word[:-1]
+        return new_word
+    except:
+        return ''
 
 def query(sentence):
     '''
@@ -175,7 +178,11 @@ def query4(sentence):
                         if d[0] != '\t':
                             definition = d
                             break
+                if len(definition.split()) > 20:
+                    definition = " ".join(str(x) for x in definition.split()[:20])
                 new_word = reverse_definition(definition)
+                if not new_word:
+                    new_word = word
                 new_word = translator.translate(new_word , dest="de").text
                 new_word = translator.translate(new_word ).text
                 sent_list[i] = new_word
@@ -193,7 +200,11 @@ def query4(sentence):
 
             #reverse search on the definition
             definition = definition.replace("[","").replace("]","").split("\n")[0].replace(" ", "+")
+            if len(definition.split()) > 20:
+                definition = " ".join(str(x) for x in definition.split()[:20])
             new_word = reverse_definition(definition)
+            if not new_word:
+                new_word = word
             new_word = translator.translate(new_word , dest="de").text
             new_word = translator.translate(new_word ).text
 
