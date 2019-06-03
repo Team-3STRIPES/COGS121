@@ -29,7 +29,6 @@ $(document).ready(() => {
         if(numWords < 10) {
           $('#test-button').attr('href', '#');
           $('#test-button').on('mouseenter', (e) => {
-            console.log('ok');
             $('#test-button').css('cursor', 'not-allowed');
           });
           $('#test-button').on('click', (e) => {
@@ -83,7 +82,7 @@ $(document).ready(() => {
             $star.css('color', '#72d9e5');
             break;
           default:
-            console.log("something broke.");
+            // something broke if it goes here
             break;
         }
       });

@@ -164,7 +164,6 @@ $(document).ready(() => {
 	function submitAction() {
 		if (answerValue === testQuestions[currentIndex].correct) {
 			$('#'+answerValue).css("background-color","#7aea6b");
-			console.log(answerValue);
       numCorrect++;
 		}
 		else {
