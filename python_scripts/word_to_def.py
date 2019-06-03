@@ -41,9 +41,9 @@ def reverse_definition(definition):
     new_url = rl_url+definition
     data = requests.get(new_url).json()
     new_word = ""
-    for syn in data[:2]:
-        new_word += syn['word']+'/'
-    new_word = new_word[:-1]
+    for syn in data[:1]:
+        new_word += syn['word']
+    #new_word = new_word[:-1]
     return new_word
 
 def query(sentence):
@@ -148,9 +148,69 @@ def query3(sentence):
     sentence = translator.translate(sentence).text
     print(sentence)
 
+def query4(sentence):
+    '''
+    Method: translate sentence and replace slang with nonslang words
+        checks if word exists in dictionary.com/e/slang first
+    Input: sentence to be translated - string
+    Return: translated sentence - string
+    '''
+    translator = Translator()
+
+    sent_list = sentence.split()
+    slang_words = predict(sentence)
+    for i, word in enumerate(sent_list):
+
+        #check if words are not in nltk.words() or if is slang
+        if word in slang_words or not word in words.words():
+            foundDefn = False
+            try:
+                #ping dictionary.com/e/slang for slang definition
+                new_url = dict_url + word
+                html = requests.get(new_url).text
+                parsed_html = BeautifulSoup(html, 'html.parser')
+                definition = list(filter(None, parsed_html.body.find('div', attrs={'class':'article-word__header__content__holder'}).text.strip().split('\n')))
+                if definition[0] == 'RELATED WORDS':
+                    for d in definition[1:]:
+                        if d[0] != '\t':
+                            definition = d
+                            break
+                new_word = reverse_definition(definition)
+                new_word = translator.translate(new_word , dest="de").text
+                new_word = translator.translate(new_word ).text
+                sent_list[i] = new_word
+                foundDefn = True
+            except:
+                pass
+
+            #also ping urbandictionary for definitions
+            new_url = ud_url+word
+            data = requests.get(new_url).json()
+            if not data['list']:
+                continue
+            definition = data['list'][0]['definition']
+            example = data['list'][0]['example']
+
+            #reverse search on the definition
+            definition = definition.replace("[","").replace("]","").split("\n")[0].replace(" ", "+")
+            new_word = reverse_definition(definition)
+            new_word = translator.translate(new_word , dest="de").text
+            new_word = translator.translate(new_word ).text
+
+            #replace word with new nonslang word
+            if foundDefn:
+                pass
+            else:
+                sent_list[i] = new_word
+
+    #rebuiid and output translated sentence to stdout
+    new_sentence = " ".join(str(x) for x in sent_list)
+    print(new_sentence, flush=True)
+
 
 if __name__ == '__main__':
     sentence = str(sys.argv[1])
     #query(sentence)
     #query2(sentence)
-    query3(sentence)
+    #query3(sentence)
+    query4(sentence)

@@ -31,8 +31,6 @@ $(document).ready(() => {
 
   // displays the translation, assuming that the back end has already been pinged
   function displayTranslation() {
-    clearInterval(definitionsLoading);
-    $('.definitions').empty();
     if(finalMessage !== "\n") {
       $outputBox.css('color', '#111');
     } else {
@@ -61,13 +59,20 @@ $(document).ready(() => {
       }
     }, 150);
 
-    reqDefinition();
-    reqSlang();
+    if (userInput == "") {
+      finalMessage = "\n";
+      displayTranslation();
+      clearInterval(definitionsLoading);
+      $('.definitions').empty();
+    }
+    else {
+      reqDefinition();
+      reqSlang();
+    }
   }
 
   // calls backend route to retrieve the translation of the phrase that the user typed in
   function reqDefinition() {
-
     // this handles the animation while waiting for a response from the backend
     let loadingMsg = 'Translating..';
     const maxTimes = 5;
@@ -151,7 +156,6 @@ $(document).ready(() => {
 
   // retrieves definitions of slang words to display underneath translation, and updates user's collection of words
   function addDefinition(words) {
-
     let $definition = $('.definitions');
     for (let i = 0; i < words.length; i++) {
 
@@ -166,6 +170,8 @@ $(document).ready(() => {
             def: doc.data().def
           })
           if (words.includes(doc.data().word)) {
+            console.log('setting to ""')
+
             words[words.indexOf(doc.data().word)] = "";
           }
 
@@ -173,9 +179,8 @@ $(document).ready(() => {
           $definition.append(`<p class="definition"><span class="definition-term">${doc.data().word} &mdash; </span>${doc.data().def}</p>`);
         });
       });
-
-      return words;
     }
+    return words;
   }
 
   // retrieves the slang words that were detected
@@ -189,6 +194,8 @@ $(document).ready(() => {
               def: userInput,
             },
       success: (data, textStatus, jqXHR) => {
+        clearInterval(definitionsLoading);
+        $('.definitions').empty();
 
         //data.words is the words separated by '+'
         let words = data.words.trim().split("+");
