@@ -1,3 +1,9 @@
+'''
+Python script used to detect slang in a given input text block.
+This script isn't very different from detect_slang.py but was
+mainly used as just a tester for the trained model. 
+'''
+
 import spacy
 import sys
 
