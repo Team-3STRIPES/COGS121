@@ -1,10 +1,10 @@
 # Team Name: 3STRIPES
 
 ## Team Members
-<b>Edward Chen</b>: Headed all of the slang translation algorithm (all of the python scripts) and set up database.
-<b>Eunice Chan</b>: Headed design of the application, helped code pages in HTML, CSS, JS, and took charge of branding and logo design.
-<b>Nathaniel Qin</b>: Headed the linking of front-end pages to Firebase and Firestore, helped code pages in HTML, CSS, and JS.
-<b>Sumeet Bansal</b>: Helped refactor code and set up database.
+* <b>Edward Chen</b>: Headed all of the slang translation algorithm (all of the python scripts), created backend routes, and set up database.<br>
+* <b>Eunice Chan</b>: Helped design user interface, helped code pages in HTML, CSS, JS, and took charge of branding and logo design.<br>
+* <b>Nathaniel Qin</b>: Headed the linking of front-end pages to Firebase and Firestore, helped code pages in HTML, CSS, and JS, and helped design user interface.<br>
+* <b>Sumeet Bansal</b>: Helped refactor code and set up database.<br>
 
 ## Source Code Files
 ### Python
@@ -42,6 +42,7 @@
 <li><b>profile.js</b> &mdash; This file contains all of the scripts necessary for the profile page. Some functionalities include various button click handlers. This also pings the database to retrieve information about the user, such as their word count, their level, and their translation history.</li>
 <li><b>study.js</b> &mdash; This file contains all of the scripts necessary for the flash cards studying page. The database is first pinged for all of the words that the user has seen before. Then, the flash cards are populated into an object (flashCards). There are also button click event handlers for navigating between the cards.</li>
 <li><b>test.js</b> &mdash; This file contains all of the scripts necessary for the testing page. There are various, simple button event handlers. Most of the functionalities in here are for retrieving questions from the database, and for making sure the quiz is randomized each time.</li>
+<li><b>server.js</b> &mdash; This file contains all of the scripts necessary for linking the front-end pages to the back-end routes. Uses Express.js.</li>
 </ul>
 
 ## Google Slide Presentation
