@@ -46,4 +46,7 @@
 </ul>
 
 ## Google Slide Presentation
-<a href="https://docs.google.com/presentation/d/1FLko5TKmta40VUbRjMvWWSMNCHMel5xP01CJPoORVjk/edit?usp=sharing">Click me!</a><br>
+<a href="https://docs.google.com/presentation/d/1FLko5TKmta40VUbRjMvWWSMNCHMel5xP01CJPoORVjk/edit?usp=sharing">Click me for the Google Slide!</a><br>
+
+## Final Video Demo
+<a href="https://www.youtube.com/watch?v=VK4VvmrPVRo">Click me to see the video!</a><br>
