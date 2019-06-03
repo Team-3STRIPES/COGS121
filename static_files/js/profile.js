@@ -31,6 +31,24 @@ $(document).ready(() => {
 
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
+      // determine if they have enough words to take a test
+      firebase.firestore().collection('users').doc(user.uid).collection('words').get().then((querySnapshot) => {
+        let numWords = 0;
+        querySnapshot.forEach((doc) => {
+          numWords++;
+        });
+        if(numWords < 10) {
+          $('#test-button').attr('href', '#');
+          $('#test-button').on('mouseenter', (e) => {
+            console.log('ok');
+            $('#test-button').css('cursor', 'not-allowed');
+          });
+          $('#test-button').on('click', (e) => {
+            alert("You must have more than 10 words translated to use this function!");
+          });
+        }
+      });
+
       // set star name
       $('.profile-name').first().text(user.displayName);
       let userRef = firebase.firestore().collection('users').doc(user.uid);

@@ -99,6 +99,7 @@ $(document).ready(() => {
           $definition.append(`<p class="definition"><span class="definition-term">${word} &mdash; </span>
             ${data.def}</p>`);
           firebase.firestore().collection('users').doc(userID).collection('words').doc(word).set({
+            word: word,
             def: data.def
           });
         }

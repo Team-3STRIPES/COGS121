@@ -2,114 +2,164 @@ $(document).ready(() => {
 
 	let currentIndex = 0;
 	let answerValue;
+  let words = [];
+  let dummyAnswers = [];
+  let testQuestions = [];
 
-	// pulls test questions from Firebase
-	let fake_answers = [], test_bank = [], dummyQuestions = [];
-	const FIREBASE_URL = 'https://firestore.googleapis.com/v1/projects/cogs121-c88c5/databases/(default)/documents/question_set/question_set';
-	$.get(FIREBASE_URL, function(data) {
-		// cleans up the JSON (original data can be viewed at FIREBASE_URL)
-		fake_answers = data.fields.fake_questions.arrayValue.values.map((val) => val.stringValue);
-		test_bank = data.fields.test_bank.arrayValue.values.map((val) => [
-			val.mapValue.fields.term.stringValue,
-			val.mapValue.fields.definition.stringValue
-		]);
-		// for each question
-		for (qIndex in test_bank) {
-			const qitem = test_bank[qIndex];
-			const term = qitem[0], definition = qitem[1];
-			// random answer index for correct definition
-			const trueIndex = 1 + Math.floor(Math.random() * 4);
-			// creates the answer array
-			let options = fake_answers
-				.filter((fAns) => fAns !== definition)
-				.sort(() => 0.5 - Math.random())
-				.slice(0, 3);
-			options.splice(trueIndex - 1, 0, definition);
-			// maintains original dummyQuestions schema
-			let jobj = {
-				question: `What does \"${term}\" mean?`,
-				correct: 'a' + trueIndex
-			};
-			for (o in options) {
-				const shifted = parseInt(o) + 1;
-				jobj['a' + shifted] = options[o];
-			}
-			dummyQuestions.push(jobj);
-		}
-		// must be in the callback because it depends on dummyQuestions, which is populated above
-		setQuestions();
-	});
+  let numCorrect = 0;
+
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+
+      // get words of this current user
+      let numWords = 0;
+      firebase.firestore().collection('users').doc(user.uid).collection('words').get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+
+          // get the definitions of each word
+          words.push({
+            word: doc.data().word,
+            definition: doc.data().def
+          });
+          dummyAnswers.push(doc.data().def);
+          numWords++;
+        });
+
+        // choose 10 words for the question
+        if(numWords < 10) {
+          window.location.href = 'profile.html';
+        }
+
+        words = shuffle(words);
+
+        for(let i = 0; i < 10; i++) {
+          let randomAnswers = [words[i].definition];
+          let checked = [];
+          for(let j = 0; j < dummyAnswers.length; j++) {
+            checked.push(false);
+            if(dummyAnswers[j] == words[i].definition) checked[j] = true;
+          }
+          while(randomAnswers.length < 4) {
+            let rand = Math.floor(Math.random() * dummyAnswers.length);
+            if(checked[rand]) continue;
+            else {
+              randomAnswers.push(dummyAnswers[rand]);
+              checked[rand] = true;
+            }
+          }
+
+          randomAnswers = shuffle(randomAnswers);
+
+          let correct;
+          for(let j = 0; j < randomAnswers.length; j++) {
+            if(randomAnswers[j] == words[i].definition) {
+              correct = j + 1;
+              break;
+            }
+          }
+
+          testQuestions.push({
+            question: `What does "${words[i].word}" mean?`,
+            a1: randomAnswers[0],
+            a2: randomAnswers[1],
+            a3: randomAnswers[2],
+            a4: randomAnswers[3],
+            correct: 'a' + correct
+          });
+        }
+        console.log(testQuestions);
+      	setQuestions();
+      });
+    } else {
+      window.location.href = 'home.html';
+    }
+  });
+
+  // shuffles array in place. fisher-yates shuffle algorithm
+  function shuffle(arr) {
+    var j, x, i;
+    for (i = arr.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = arr[i];
+        arr[i] = arr[j];
+        arr[j] = x;
+    }
+    return arr;
+}
 
 	setButton();
 	setCircle();
 
 	function setQuestions() {
-	    $('#question').text(dummyQuestions[currentIndex].question);
-	    $('#a1').text(dummyQuestions[currentIndex].a1);
-	    $('#a2').text(dummyQuestions[currentIndex].a2);
-	    $('#a3').text(dummyQuestions[currentIndex].a3);
-	    $('#a4').text(dummyQuestions[currentIndex].a4);
+	    $('#question').text(testQuestions[currentIndex].question);
+      $('#question-number').text(currentIndex + 1 + ". ");
+	    $('#a1').text(testQuestions[currentIndex].a1);
+	    $('#a2').text(testQuestions[currentIndex].a2);
+	    $('#a3').text(testQuestions[currentIndex].a3);
+	    $('#a4').text(testQuestions[currentIndex].a4);
   	}
 
-  	function setButton() {
-  		if (currentIndex === 9) {
-  			$('.submitbtn').text("SUBMIT");
-  		}
-  		else {
-			$('.submitbtn').text("NEXT");
-  		}
-  	}
+	function setButton() {
+		if (currentIndex === 9) {
+			$('.submitbtn').text("SUBMIT");
+		}
+		else {
+		$('.submitbtn').text("NEXT");
+		}
+	}
 
-  	function setCircle() {
-  		for (i = 0; i <= currentIndex; i++) {
-				$('.progress-circle').eq(i).css("background-color", "#EEE");
-			}
-  	}
+	function setCircle() {
+		for (i = 0; i <= currentIndex; i++) {
+			$('.progress-circle').eq(i).css("background-color", "#EEE");
+		}
+	}
 
-  	// marks selected as yellow, not selected as gray
+	// marks selected as yellow, not selected as gray
 
-  	$('.answer-option').on('click', function() {
-  		$('.answer-option').css("background-color", "#EEE");
-  		$(this).css("background-color", "#f7d345");
-  		answerValue = $(this).attr('id');
-  	})
-
-  	//updates button text and questions every time the button is pressed
-
-  	function updateQuestion() {
-  		//e.preventDefault();
-  		if (currentIndex === 9) {
-    			alert("You have reached the end of the test.");
-    		}
-  		else {
-  			currentIndex++;
-        answerValue = null;
-  			$('.answer-option').css("background-color", "#EEE");
-  			setQuestions();
-  			setButton();
-  			setCircle();
-  		}
-  	}
-
-  	function submitAction() {
-  		if (answerValue === dummyQuestions[currentIndex].correct) {
-  			$('#'+answerValue).css("background-color","#7aea6b");
-  			console.log(answerValue);
-  		}
-  		else {
-  			$('#'+dummyQuestions[currentIndex].correct).css("background-color","#7aea6b");
-  			$('#'+answerValue).css("background-color","#e2685a");
-  		}
-  		setTimeout(updateQuestion,1500);
-  	}
-
-  	$('.submitbtn').on('click', (e) => {
-      if(!answerValue) {
-        alert("You must select an answer.");
-        return;
-      }
-  		submitAction();
-  	})
-
-
+	$('.answer-option').on('click', function() {
+		$('.answer-option').css("background-color", "#EEE");
+		$(this).css("background-color", "#f7d345");
+		answerValue = $(this).attr('id');
 	})
+
+	//updates button text and questions every time the button is pressed
+
+	function updateQuestion() {
+		//e.preventDefault();
+		if (currentIndex === 9) {
+  			alert("You have reached the end of the test. You scored: " + numCorrect + "/10.");
+        setTimeout(() => {
+          window.location.href = 'profile.html';
+        }, 0);
+  		}
+		else {
+			currentIndex++;
+      answerValue = null;
+			$('.answer-option').css("background-color", "#EEE");
+			setQuestions();
+			setButton();
+			setCircle();
+		}
+	}
+
+	function submitAction() {
+		if (answerValue === testQuestions[currentIndex].correct) {
+			$('#'+answerValue).css("background-color","#7aea6b");
+			console.log(answerValue);
+      numCorrect++;
+		}
+		else {
+			$('#'+testQuestions[currentIndex].correct).css("background-color","#7aea6b");
+			$('#'+answerValue).css("background-color","#e2685a");
+		}
+		setTimeout(updateQuestion,1500);
+	}
+
+	$('.submitbtn').on('click', (e) => {
+    if(!answerValue) {
+      alert("You must select an answer.");
+      return;
+    }
+		submitAction();
+	})
+})
