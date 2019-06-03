@@ -89,10 +89,10 @@ $(document).ready(() => {
 
       // set history
       let $history = $('#history-list');
-      userRef.collection('history').get().then((querySnapshot) => {
+      userRef.collection('history').orderBy('time', 'desc').limit(10).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           $history.append(`<li><span class="term">${doc.data().word}</span> &mdash; <span class="term-def">${doc.data().definition}</span></li>`);
-        })
+        });
       })
     } else {
 
