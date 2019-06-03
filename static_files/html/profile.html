@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+
+<!-- html source code for the profile page -->
 <html>
 	<head>
 		<title>Profile</title>
@@ -8,16 +10,12 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous"><link href="https://fonts.googleapis.com/css?family=Oxygen:300,400,700" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="profile.js"></script>
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- Firebase Scripts -->
     <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-firestore.js"></script>
-
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-         https://firebase.google.com/docs/web/setup#config-web-app -->
-
     <script>
-      // Your web app's Firebase configuration
+      // Firebase configuration
       var firebaseConfig = {
         apiKey: "AIzaSyBjQZdC4RzK-EOz-f8-w34MEV68lRYPASs",
         authDomain: "cogs121-c88c5.firebaseapp.com",
@@ -32,26 +30,30 @@
     </script>
 	</head>
 	<body>
+    <!-- breadcrumb button -->
     <a class="my-button" href="home.html">
       <div class="back-button"> &lt; BACK TO TRANSLATION</div>
     </a>
+    <!-- main section of the profile -->
 		<div class="main-section">
       <div class="profile-section">
         <p class="profile-name"></p>
   			<p class="profile-level"><i class="fas fa-star"></i> <span id="profile-level"></span> Level</p>
       </div>
+      <!-- navigation buttons -->
       <div class="profile-buttons">
   			<a class="my-button" href="study.html">
           <div class="profile-nav-button">
             <p>Study Flash Cards</p>
           </div>
         </a>
-  			<a class="my-button" href="test.html">
+  			<a class="my-button" href="test.html" id="test-button">
           <div class="profile-nav-button">
             <p>Test Yourself</p>
           </div>
         </a>
       </div>
+      <!-- translation history section -->
       <div class="profile-section" id="trans-history">
         <h4>Translation History</h4>
         <ul id="history-list">

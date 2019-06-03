@@ -8,7 +8,8 @@ import sys
 
 
 def tts(sentence):
-	filename = './audio/'+sentence + '.mp3'
+	sentence = sentence.strip()
+	filename = './audio/' + sentence + '.mp3'
 	tts = gTTS(sentence)
 	tts.save(filename)
 	print(sentence+'.mp3')

@@ -1,5 +1,12 @@
+/* This file contains all of the scripts necessary for the profile page.
+ * Some functionalities include various button click handlers. This also pings
+ * the database to retrieve information about the user, such as their word
+ * count, their level, and their translation history.
+ */
+
 $(document).ready(() => {
 
+  // arbitrary cutoffs for levels
   const iron = 0;
   const bronze = 10;
   const silver = 50;
@@ -7,31 +14,30 @@ $(document).ready(() => {
   const platinum = 250;
   const diamond = 500;
 
-  $('.edit-button').on('click', () => {
-    openModal();
-  });
-
-  $('.submit-button').on('click', () => {
-    closeModal();
-  })
-
-  $('#profile-edit-modal').on('click', (e) => {
-    if(e.target.id === 'profile-edit-modal') {
-      closeModal();
-    }
-  })
-
-  function openModal() {
-    $('#profile-edit-modal').css('display', 'flex');
-  }
-
-  function closeModal() {
-    $('#profile-edit-modal').css('display', 'none');
-  }
-
+  // check if user is logged in; must be authenticated to view this page
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      // set star name
+
+      // determine if they have enough words to take a test (>10)
+      firebase.firestore().collection('users').doc(user.uid).collection('words').get().then((querySnapshot) => {
+        let numWords = 0;
+        querySnapshot.forEach((doc) => {
+          numWords++;
+        });
+
+        // disable testing functionality if they do not have enough words
+        if(numWords < 10) {
+          $('#test-button').attr('href', '#');
+          $('#test-button').on('mouseenter', (e) => {
+            $('#test-button').css('cursor', 'not-allowed');
+          });
+          $('#test-button').on('click', (e) => {
+            alert("You must have more than 10 words translated to use this function!");
+          });
+        }
+      });
+
+      // set profile information
       $('.profile-name').first().text(user.displayName);
       let userRef = firebase.firestore().collection('users').doc(user.uid);
       userRef.get().then((doc) => {
@@ -76,7 +82,7 @@ $(document).ready(() => {
             $star.css('color', '#72d9e5');
             break;
           default:
-            console.log("something broke.");
+            // something broke if it goes here
             break;
         }
       });
@@ -89,6 +95,8 @@ $(document).ready(() => {
         })
       })
     } else {
+
+      // kick user back to home page if not authenticated
       window.location.href = "home.html";
     }
   });
