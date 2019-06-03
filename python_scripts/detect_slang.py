@@ -13,10 +13,10 @@ from nltk.corpus import words
 
 
 def predict(text):
-	'''
-	Method: output a string containing slang words deliminated by "+"
-	Input: text - string
-	'''
+    '''
+    Method: output a string containing slang words deliminated by "+"
+    Input: text - string
+    '''
     nlp = spacy.load("./python_scripts/model")
     doc = nlp(text)
 
@@ -25,15 +25,15 @@ def predict(text):
 
     #Find any words that aren't in the English language
     for word in text:
-    	if word not in words.words() and word not in slang_words:
-    		slang_words.append(word)
+        if word not in words.words() and word not in slang_words:
+            slang_words.append(word)
 
     #Output string deliminted by "+"
     print("+".join(slang_words))
 
 
 if __name__ == '__main__':
-	sentence = str(sys.argv[1])
-	predict(sentence)
+    sentence = str(sys.argv[1])
+    predict(sentence)
 
 
