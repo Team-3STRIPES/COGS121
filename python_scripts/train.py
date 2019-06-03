@@ -1,8 +1,23 @@
+'''
+Python script used to train a spaCy model from a json file. 
+spaCy is an open-source software library for advanced Natural Language Processing, 
+written in the programming languages Python and Cython. This script has 
+two functions, one function converts the json file from dataturks (a website used 
+to annotate text and other mediums for machine learning) formating to
+a formating used by spaCy. The second function trains the model from the data. 
+'''
+
 import spacy
 import json
 import random
 
+
 def convert_dataturks_to_spacy(dataturks_JSON_FilePath):
+    '''
+    Method: used to convert a json file from dataturks formatting to a 
+        formatting used by spaCy
+    Input:  filepath to the json file - string
+    '''
     try:
         training_data = []
         lines=[]
@@ -13,8 +28,11 @@ def convert_dataturks_to_spacy(dataturks_JSON_FilePath):
             data = json.loads(line)
             text = data['content']
             entities = []
+
+            #ignore points with no annotations
             if not data['annotation']:
                 continue
+
             for annotation in data['annotation']:
                 #only a single point in text annotation.
                 point = annotation['points'][0]
@@ -35,10 +53,16 @@ def convert_dataturks_to_spacy(dataturks_JSON_FilePath):
 
 
 def train_spacy():
+    '''
+    Method: train a spaCy model to perform Named Entity Recognition.
+        The method saves the model to ./model 
+    '''
+
     TRAIN_DATA = convert_dataturks_to_spacy("../twitter_data/slang5.json");
     nlp = spacy.blank('en')  # create blank Language class
     # create the built-in pipeline components and add them to the pipeline
     # nlp.create_pipe works for built-ins that are registered with spaCy
+
     if 'ner' not in nlp.pipe_names:
         ner = nlp.create_pipe('ner')
         nlp.add_pipe(ner, last=True)
@@ -64,12 +88,8 @@ def train_spacy():
                     sgd=optimizer,  # callable to update weights
                     losses=losses)
             print(losses)
+
+    #save model 
     nlp.to_disk("./model")
-    
-    #do prediction
-    text = "damn you're swole bruh"
-    print(text)
-    doc = nlp(text)
-    print ("Entities= " + str(["" + str(ent.text) + "_" + str(ent.label_) for ent in doc.ents]))
 
 train_spacy()

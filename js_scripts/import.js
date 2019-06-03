@@ -1,12 +1,13 @@
+/**
+ * Javascript script to easily import a json file into Google Firestore
+ * and to censor any profanity found in any of the definitions. 
+ */
+
 var Filter = require('bad-words');
 var definitions = require('../twitter_data/definitions.json')
 var fs = require('fs');
-
-
-
-let filter = new Filter();
-
-
+const serviceAccount = require('./sa.json');
+const firestoreService = require('firestore-export-import');
 const firebaseConfig = {
       apiKey: "AIzaSyBjQZdC4RzK-EOz-f8-w34MEV68lRYPASs",
       authDomain: "cogs121-c88c5.firebaseapp.com",
@@ -17,10 +18,12 @@ const firebaseConfig = {
       appId: "1:570075063656:web:7631847ba177ded3"
     };
 
-const serviceAccount = require('./sa.json');
+let filter = new Filter();
 
-const firestoreService = require('firestore-export-import');
-
+/**
+ * Function to connect to Google Firestore and upload a
+ * json file into the database. 
+ */
 const jsonToFirestore = async () => {
   try {
     console.log('Initialzing Firebase');
@@ -36,6 +39,10 @@ const jsonToFirestore = async () => {
 };
 
 
+/**
+ * Function to open a json file and censor any of the definitions
+ * found in the json file. Writes back the censored definition. 
+ */
 let censor = () => {
   let filter = new Filter();
   for (let i = 0; i < definitions['definition'].length; i++) {
@@ -49,6 +56,6 @@ let censor = () => {
   });
 }
 
-//console.log(filter.clean("what the fuck"));
+//Calls to functions 
 //censor();
-jsonToFirestore();
+//jsonToFirestore();
