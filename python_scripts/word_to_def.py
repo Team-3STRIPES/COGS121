@@ -2,9 +2,9 @@
 Python script to translate a given text into non-slang text.
 There are multiple query functions defined in this file.
 Each query was an interation of our idea on what would be the
-best way to translate a given set of text. We ended up just 
+best way to translate a given set of text. We ended up just
 going for more of a simple, hacky solution that translated
-a given set of text from English to Japanese, and back. 
+a given set of text from English to Japanese, and back.
 '''
 
 from nltk.corpus import words
@@ -35,8 +35,8 @@ def predict(text):
 def reverse_definition(definition):
     '''
     Method: query words from reverese definition look-up
-    Input: a definition of a word - string 
-    Return: 3 plausible words to fit the definition - string 
+    Input: a definition of a word - string
+    Return: 3 plausible words to fit the definition - string
     '''
     new_url = rl_url+definition
     data = requests.get(new_url).json()
@@ -49,7 +49,7 @@ def reverse_definition(definition):
 def query(sentence):
     '''
     Method: translate sentence and replace slang with nonslang words
-    Input: sentence to be translated - string 
+    Input: sentence to be translated - string
     Return: translated sentence - string
     '''
     sent_list = sentence.split()
@@ -86,7 +86,7 @@ def query2(sentence):
     '''
     Method: translate sentence and replace slang with nonslang words
         checks if word exists in dictionary.com/e/slang first
-    Input: sentence to be translated - string 
+    Input: sentence to be translated - string
     Return: translated sentence - string
     '''
     sent_list = sentence.split()
@@ -124,7 +124,7 @@ def query2(sentence):
             #reverse search on the definition
             definition = definition.replace("[","").replace("]","").split("\n")[0].replace(" ", "+")
             new_word = reverse_definition(definition)
-            
+
             #replace word with new nonslang word
             if foundDefn:
                 sent_list[i] = sent_list[i] + "/" + new_word
@@ -140,11 +140,11 @@ def query3(sentence):
     '''
     Method: translate sentence and replace slang with nonslang words
         translate from Englishg to Japanese to English
-    Input: sentence to be translated - string 
+    Input: sentence to be translated - string
     Return: translated sentence - string
     '''
     translator = Translator()
-    sentence = translator.translate(sentence, dest="ja").text
+    sentence = translator.translate(sentence, dest="de").text
     sentence = translator.translate(sentence).text
     print(sentence)
 
@@ -154,4 +154,3 @@ if __name__ == '__main__':
     #query(sentence)
     #query2(sentence)
     query3(sentence)
-

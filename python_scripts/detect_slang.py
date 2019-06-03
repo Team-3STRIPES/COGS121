@@ -1,8 +1,8 @@
 '''
 Python script used to detect slang in a given input text block.
-The script uses a pre-trained spaCy (an open-source software library 
+The script uses a pre-trained spaCy (an open-source software library
 for advanced Natural Language Processing) model, to detect slang
-in the given text. For any words that are in the text block that 
+in the given text. For any words that are in the text block that
 also do not appear in the nltk.corpus words dataset will be counted
 as slang. The script outputs the result to stdout. 
 '''
@@ -35,5 +35,3 @@ def predict(text):
 if __name__ == '__main__':
     sentence = str(sys.argv[1])
     predict(sentence)
-
-
