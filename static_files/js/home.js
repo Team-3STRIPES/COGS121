@@ -173,8 +173,9 @@ $(document).ready(() => {
           $definition.append(`<p class="definition"><span class="definition-term">${doc.data().word} &mdash; </span>${doc.data().def}</p>`);
         });
       });
+
+      return words;
     }
-    return words;
   }
 
   // retrieves the slang words that were detected
