@@ -185,7 +185,9 @@ $(document).ready(() => {
 
         // update definition in collection of definitions if does not exist
         $.when(addDefinition(words)).then((e) => {
+          console.log(e)
           for (let i = 0; i < e.length; i++) {
+            console.log(e[i]);
             if (e[i] != "") {
               updateDefinition(e[i]);
             }

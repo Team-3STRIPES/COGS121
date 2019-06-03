@@ -14,5 +14,5 @@ def predict(text):
     print(str(["" + str(ent.text) + "_" + str(ent.label_) for ent in doc.ents]))
 
 if __name__ == '__main__':
-	sentence = str(sys.argv[1])
-	predict(sentence)
+    sentence = str(sys.argv[1])
+    predict(sentence)
