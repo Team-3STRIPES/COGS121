@@ -19,9 +19,9 @@
   "homepage": "https://github.com/Team-3STRIPES/COGS121#readme",
   "dependencies": {
     "bad-words": "^3.0.2",
-    "body-parser": "^1.19.0",
+    "body-parser": "^1.20.1",
     "child-process": "^1.0.2",
-    "express": "^4.16.4",
+    "express": "^4.18.2",
     "firebase": "^6.0.2",
     "firestore-export-import": "^0.1.7",
     "urban-dictionary": "^2.2.1"
